@@ -1,0 +1,184 @@
+{
+  "levelIndex": 2,
+  "name": "Level 3 - Shell Guard",
+  "stageIndex": 2,
+  "worldWidth": 140,
+  "spawn": [
+    -7,
+    0
+  ],
+  "finish": [
+    135,
+    4
+  ],
+  "finishSize": [
+    2,
+    3
+  ],
+  "requiredCollectibles": 0,
+  "tutorialLine": "Step on colored pads to switch Squad roles.",
+  "platforms": [
+    {
+      "name": "Ground_Start",
+      "position": [
+        -5,
+        -2
+      ],
+      "size": [
+        10,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Ground_Mid",
+      "position": [
+        20,
+        2
+      ],
+      "size": [
+        16,
+        0.800000011920929
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Ground_AfterNerveGate",
+      "position": [
+        45,
+        3
+      ],
+      "size": [
+        16,
+        0.800000011920929
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Ground_AfterMuscleGate",
+      "position": [
+        85,
+        5
+      ],
+      "size": [
+        20,
+        0.800000011920929
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Ground_End",
+      "position": [
+        125,
+        6
+      ],
+      "size": [
+        22,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    }
+  ],
+  "hazards": [
+    {
+      "name": "Spike_Hazard",
+      "position": [
+        30,
+        -4
+      ],
+      "size": [
+        20,
+        1
+      ]
+    }
+  ],
+  "collectibles": [
+    {
+      "name": "VocabGem_1",
+      "position": [
+        20,
+        4
+      ]
+    },
+    {
+      "name": "VocabGem_2",
+      "position": [
+        85,
+        7
+      ]
+    }
+  ],
+  "growthPickups": [],
+  "checkpoints": [
+    {
+      "name": "Checkpoint_MidGate",
+      "position": [
+        45,
+        4.5
+      ]
+    }
+  ],
+  "rolePads": [
+    {
+      "name": "NervePad",
+      "position": [
+        5,
+        1
+      ],
+      "role": "Nerve"
+    },
+    {
+      "name": "MusclePad",
+      "position": [
+        35,
+        4
+      ],
+      "role": "Muscle"
+    }
+  ],
+  "roleGates": [
+    {
+      "name": "NerveGate",
+      "position": [
+        15,
+        0
+      ],
+      "requiredRole": "Nerve"
+    },
+    {
+      "name": "MuscleGate",
+      "position": [
+        60,
+        3
+      ],
+      "requiredRole": "Muscle"
+    }
+  ],
+  "windZones": [],
+  "villainGates": []
+}

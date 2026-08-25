@@ -1,0 +1,52 @@
+[
+  {
+    "levelIndex": 0,
+    "file": "level_00.json",
+    "name": "Level 1 - First Steps"
+  },
+  {
+    "levelIndex": 1,
+    "file": "level_01.json",
+    "name": "Level 2 - Steady Scout"
+  },
+  {
+    "levelIndex": 2,
+    "file": "level_02.json",
+    "name": "Level 3 - Shell Guard"
+  },
+  {
+    "levelIndex": 3,
+    "file": "level_03.json",
+    "name": "Level 4 - Gentle Giant"
+  },
+  {
+    "levelIndex": 4,
+    "file": "level_04.json",
+    "name": "Level 5 - Deep Diver"
+  },
+  {
+    "levelIndex": 5,
+    "file": "level_05.json",
+    "name": "Level 6 - Rising Wings"
+  },
+  {
+    "levelIndex": 6,
+    "file": "level_06.json",
+    "name": "Level 7 - Fast Track"
+  },
+  {
+    "levelIndex": 7,
+    "file": "level_07.json",
+    "name": "Level 8 - Power Hop"
+  },
+  {
+    "levelIndex": 8,
+    "file": "level_08.json",
+    "name": "Level 9 - Master Mentor"
+  },
+  {
+    "levelIndex": 9,
+    "file": "level_09.json",
+    "name": "Level 10 - Squad Champion"
+  }
+]

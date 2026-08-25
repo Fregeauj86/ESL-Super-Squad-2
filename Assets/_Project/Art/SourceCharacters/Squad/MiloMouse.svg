@@ -1,0 +1,65 @@
+<!--
+  MiloMouse — squad hero, default pose (stage 2 "learning", emotion idle).
+  Extracted from J:/ESL Website Project/esl-super-squad-v2/src/components/characters/movable/MiloMouseV2.tsx
+  (source read-only, not modified). Original is a parametric React/SVG component:
+  stage 1/3 change headR/earR/bodyRx/eyeR; emotion changes mouthEl (happy/sad/angry/scared/idle)
+  and adds angry eyebrows; stage 3 adds a gold glow ring. See _ReferenceSource/movable/MiloMouseV2.tsx
+  for the full parametric source and _ReferenceSource/movable/characterStyles.css for animations.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="140" height="200" viewBox="0 0 140 200" overflow="visible">
+  <style>
+    .ear  { fill: #D6D6D6; }
+    .head { fill: #D6D6D6; }
+    .eye  { fill: #1A1A1A; }
+    .nose { fill: #FFB3BA; }
+    .body { fill: #C5C5C5; }
+    .arm  { fill: #AAAAAA; }
+    .leg  { fill: #AAAAAA; }
+    .mouth { stroke: #1A1A1A; stroke-width: 2.5; stroke-linecap: round; }
+  </style>
+
+  <!-- Ears -->
+  <circle cx="40"  cy="40" r="28" class="ear" />
+  <circle cx="100" cy="40" r="28" class="ear" />
+  <circle cx="40"  cy="40" r="16" fill="#FFB3BA" opacity="0.6" />
+  <circle cx="100" cy="40" r="16" fill="#FFB3BA" opacity="0.6" />
+
+  <!-- Head -->
+  <circle cx="70" cy="70" r="35" class="head" />
+
+  <!-- Eyes -->
+  <circle cx="55" cy="65" r="6" class="eye" />
+  <circle cx="85" cy="65" r="6" class="eye" />
+  <circle cx="57" cy="62" r="2" fill="white" />
+  <circle cx="87" cy="62" r="2" fill="white" />
+
+  <!-- Nose -->
+  <circle cx="70" cy="82" r="5" class="nose" />
+
+  <!-- Whiskers -->
+  <line x1="70" y1="83" x2="42" y2="78" stroke="#999" stroke-width="1.2" stroke-linecap="round" />
+  <line x1="70" y1="85" x2="40" y2="86" stroke="#999" stroke-width="1.2" stroke-linecap="round" />
+  <line x1="70" y1="83" x2="98" y2="78" stroke="#999" stroke-width="1.2" stroke-linecap="round" />
+  <line x1="70" y1="85" x2="100" y2="86" stroke="#999" stroke-width="1.2" stroke-linecap="round" />
+
+  <!-- Mouth (idle) -->
+  <line x1="60" y1="92" x2="80" y2="92" class="mouth" />
+
+  <!-- Body -->
+  <ellipse cx="70" cy="138" rx="30" ry="35" class="body" />
+
+  <!-- Arms -->
+  <rect x="28"  y="112" width="15" height="40" rx="7" class="arm left" />
+  <rect x="97"  y="112" width="15" height="40" rx="7" class="arm right" />
+  <circle cx="35"  cy="155" r="8" fill="#AAAAAA" />
+  <circle cx="104" cy="155" r="8" fill="#AAAAAA" />
+
+  <!-- Legs -->
+  <rect x="50" y="165" width="15" height="30" rx="7" class="leg left" />
+  <rect x="75" y="165" width="15" height="30" rx="7" class="leg right" />
+  <ellipse cx="57"  cy="195" rx="11" ry="6" fill="#999" />
+  <ellipse cx="82"  cy="195" rx="11" ry="6" fill="#999" />
+
+  <!-- Tail -->
+  <path d="M 85 155 Q 110 165 115 185" fill="none" stroke="#AAAAAA" stroke-width="5" stroke-linecap="round" />
+</svg>

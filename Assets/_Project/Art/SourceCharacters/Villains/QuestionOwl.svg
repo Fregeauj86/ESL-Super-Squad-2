@@ -1,0 +1,38 @@
+<!--
+  QuestionOwl — villain (B1, "Ask a Question"), default pose (idle, not talking).
+  Extracted from J:/ESL Website Project/esl-super-squad-v2/src/components/characters/progression/QuestionOwlChar.tsx
+  (source read-only, not modified).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 200 200" overflow="visible">
+  <!-- Ear tufts -->
+  <polygon points="70,35 60,10 82,30" fill="#6A5ACD" />
+  <polygon points="130,35 118,30 140,10" fill="#6A5ACD" />
+
+  <!-- Grad cap -->
+  <rect x="60" y="30" width="80" height="8" rx="2" fill="#1A1A1A" />
+  <polygon points="100,16 124,30 100,32 76,30" fill="#1A1A1A" />
+  <line x1="124" y1="30" x2="130" y2="42" stroke="#9B59B6" stroke-width="2" />
+  <circle cx="130" cy="44" r="3" fill="#9B59B6" />
+
+  <!-- Body -->
+  <ellipse cx="100" cy="115" rx="50" ry="60" fill="#6A5ACD" />
+
+  <!-- Chest feathers -->
+  <ellipse cx="100" cy="115" rx="30" ry="40" fill="#9B8FE0" opacity="0.5" />
+
+  <!-- Big thinking eyes -->
+  <circle cx="75"  cy="82" r="18" fill="white" stroke="#1A1A1A" stroke-width="1.5" />
+  <circle cx="125" cy="82" r="18" fill="white" stroke="#1A1A1A" stroke-width="1.5" />
+  <circle cx="75"  cy="82" r="10" fill="#F0A500" />
+  <circle cx="125" cy="82" r="10" fill="#F0A500" />
+  <circle cx="76"  cy="82" r="6"  fill="black" />
+  <circle cx="126" cy="82" r="6"  fill="black" />
+  <circle cx="78"  cy="79" r="2"  fill="white" />
+  <circle cx="128" cy="79" r="2"  fill="white" />
+
+  <!-- Beak -->
+  <polygon points="100,98 90,112 110,112" fill="orange" />
+
+  <!-- Mouth (idle) -->
+  <ellipse cx="100" cy="122" rx="14" ry="5" fill="black" />
+</svg>

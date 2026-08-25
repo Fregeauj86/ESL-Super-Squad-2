@@ -1,0 +1,186 @@
+{
+  "levelIndex": 6,
+  "name": "Level 7 - Fast Track",
+  "stageIndex": 6,
+  "worldWidth": 180,
+  "spawn": [
+    -9,
+    -1
+  ],
+  "finish": [
+    176,
+    1
+  ],
+  "finishSize": [
+    2,
+    3
+  ],
+  "requiredCollectibles": 0,
+  "tutorialLine": "Standard platforming begins here.",
+  "platforms": [
+    {
+      "name": "Floor",
+      "position": [
+        85,
+        -2.5
+      ],
+      "size": [
+        190,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Furniture_1",
+      "position": [
+        -4,
+        -0.5
+      ],
+      "size": [
+        6,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Furniture_2",
+      "position": [
+        20,
+        0.5
+      ],
+      "size": [
+        8,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Furniture_3",
+      "position": [
+        55,
+        -0.5
+      ],
+      "size": [
+        10,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Furniture_4",
+      "position": [
+        90,
+        0.5
+      ],
+      "size": [
+        8,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Furniture_5",
+      "position": [
+        130,
+        -0.5
+      ],
+      "size": [
+        10,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Crib",
+      "position": [
+        170,
+        1.5
+      ],
+      "size": [
+        10,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    }
+  ],
+  "hazards": [],
+  "collectibles": [
+    {
+      "name": "VocabGem_1",
+      "position": [
+        20,
+        2.5
+      ]
+    },
+    {
+      "name": "VocabGem_2",
+      "position": [
+        55,
+        1.5
+      ]
+    },
+    {
+      "name": "VocabGem_3",
+      "position": [
+        90,
+        2.5
+      ]
+    },
+    {
+      "name": "VocabGem_4",
+      "position": [
+        130,
+        1.5
+      ]
+    }
+  ],
+  "growthPickups": [],
+  "checkpoints": [
+    {
+      "name": "Checkpoint_Mid",
+      "position": [
+        90,
+        2.5
+      ]
+    }
+  ],
+  "rolePads": [],
+  "roleGates": [],
+  "windZones": [],
+  "villainGates": []
+}

@@ -1,0 +1,49 @@
+<!--
+  TimmyTurtle — squad hero, default pose (stage 2 "steady", emotion idle).
+  Extracted from J:/ESL Website Project/esl-super-squad-v2/src/components/characters/movable/TimmyTurtleV2.tsx
+  (source read-only, not modified). See _ReferenceSource/movable/TimmyTurtleV2.tsx for the full
+  parametric source (stage/emotion variants) and characterStyles.css for animations.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="180" viewBox="0 0 160 180" overflow="visible">
+  <style>
+    .shell       { fill: #4CAF50; }
+    .shell-inner { fill: #2E7D32; }
+    .head        { fill: #66BB6A; }
+    .eye         { fill: #1A1A1A; }
+    .leg         { fill: #66BB6A; }
+    .mouth { stroke: #1A1A1A; stroke-width: 2.5; stroke-linecap: round; }
+  </style>
+
+  <!-- Shell -->
+  <ellipse cx="80" cy="90" rx="60" ry="48" class="shell" />
+  <polygon points="80,60 90,67 90,82 80,89 70,82 70,67"       fill="none" stroke="#1B5E20" stroke-width="1.5" />
+  <polygon points="100,70 110,77 110,92 100,99 90,92 90,77"   fill="none" stroke="#1B5E20" stroke-width="1.5" />
+  <polygon points="60,70 70,77 70,92 60,99 50,92 50,77"       fill="none" stroke="#1B5E20" stroke-width="1.5" />
+  <ellipse cx="80" cy="84" rx="48" ry="36" class="shell-inner" opacity="0.35" />
+
+  <!-- Legs -->
+  <rect x="42"  y="50"  width="18" height="32" rx="8" class="leg" />
+  <rect x="100" y="50"  width="18" height="32" rx="8" class="leg" />
+  <ellipse cx="51"  cy="50"  rx="11" ry="6" class="leg" />
+  <ellipse cx="109" cy="50"  rx="11" ry="6" class="leg" />
+  <rect x="42"  y="130" width="18" height="32" rx="8" class="leg" />
+  <rect x="100" y="130" width="18" height="32" rx="8" class="leg" />
+  <ellipse cx="51"  cy="162" rx="11" ry="6" class="leg" />
+  <ellipse cx="109" cy="162" rx="11" ry="6" class="leg" />
+
+  <!-- Neck + Head -->
+  <ellipse cx="28" cy="88" rx="14" ry="12" class="head" />
+  <circle cx="22" cy="74" r="22" class="head" />
+
+  <!-- Eyes -->
+  <circle cx="13" cy="68" r="6" class="eye" />
+  <circle cx="30" cy="68" r="6" class="eye" />
+  <circle cx="14.5" cy="66" r="2" fill="white" />
+  <circle cx="31.5" cy="66" r="2" fill="white" />
+
+  <!-- Mouth (idle) -->
+  <line x1="10" y1="84" x2="34" y2="84" class="mouth" />
+
+  <!-- Tail -->
+  <ellipse cx="140" cy="90" rx="12" ry="8" class="shell" />
+</svg>

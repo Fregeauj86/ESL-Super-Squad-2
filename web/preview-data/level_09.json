@@ -1,0 +1,271 @@
+{
+  "levelIndex": 9,
+  "name": "Level 10 - Squad Champion",
+  "stageIndex": 9,
+  "worldWidth": 210,
+  "spawn": [
+    -10,
+    0
+  ],
+  "finish": [
+    205,
+    8
+  ],
+  "finishSize": [
+    2,
+    3
+  ],
+  "requiredCollectibles": 0,
+  "tutorialLine": "Final gauntlet. All abilities unlocked.",
+  "platforms": [
+    {
+      "name": "Phase1",
+      "position": [
+        -6,
+        -1
+      ],
+      "size": [
+        12,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Phase2",
+      "position": [
+        20,
+        2
+      ],
+      "size": [
+        10,
+        0.800000011920929
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Phase3",
+      "position": [
+        50,
+        5
+      ],
+      "size": [
+        10,
+        0.800000011920929
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Phase4",
+      "position": [
+        80,
+        4
+      ],
+      "size": [
+        14,
+        0.800000011920929
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Phase5_DashRunway",
+      "position": [
+        105,
+        3
+      ],
+      "size": [
+        10,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Phase5_DashGap",
+      "position": [
+        120,
+        3
+      ],
+      "size": [
+        5,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Phase6",
+      "position": [
+        140,
+        4
+      ],
+      "size": [
+        14,
+        0.800000011920929
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Phase7",
+      "position": [
+        170,
+        6.5
+      ],
+      "size": [
+        14,
+        0.800000011920929
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Finish_Platform",
+      "position": [
+        200,
+        8.5
+      ],
+      "size": [
+        16,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    }
+  ],
+  "hazards": [
+    {
+      "name": "Gauntlet_Pit_1",
+      "position": [
+        20,
+        -3
+      ],
+      "size": [
+        40,
+        1
+      ]
+    },
+    {
+      "name": "Gauntlet_Pit_2",
+      "position": [
+        112,
+        -3
+      ],
+      "size": [
+        30,
+        1
+      ]
+    }
+  ],
+  "collectibles": [
+    {
+      "name": "VocabGem_1",
+      "position": [
+        20,
+        4
+      ]
+    },
+    {
+      "name": "VocabGem_2",
+      "position": [
+        50,
+        7
+      ]
+    },
+    {
+      "name": "VocabGem_3",
+      "position": [
+        80,
+        6
+      ]
+    },
+    {
+      "name": "VocabGem_4",
+      "position": [
+        140,
+        6
+      ]
+    },
+    {
+      "name": "VocabGem_5",
+      "position": [
+        170,
+        8.5
+      ]
+    }
+  ],
+  "growthPickups": [],
+  "checkpoints": [
+    {
+      "name": "Checkpoint_1",
+      "position": [
+        50,
+        7
+      ]
+    },
+    {
+      "name": "Checkpoint_Final",
+      "position": [
+        140,
+        6.5
+      ]
+    }
+  ],
+  "rolePads": [],
+  "roleGates": [],
+  "windZones": [],
+  "villainGates": [
+    {
+      "encounterId": "themimic_fluency",
+      "position": [
+        190,
+        9
+      ],
+      "gateSize": [
+        2,
+        3
+      ],
+      "villain": "TheMimic",
+      "cefrLevel": "C2"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+<!--
+  ConnectorSnake — villain (B2, "Connect Ideas"), default pose (idle, not talking).
+  Extracted from J:/ESL Website Project/esl-super-squad-v2/src/components/characters/progression/ConnectorSnakeChar.tsx
+  (source read-only, not modified).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 200 200" overflow="visible">
+  <!-- Body (curved path) -->
+  <path d="M50 130 Q100 60 150 130" stroke="#2ECC71" stroke-width="28" fill="none" stroke-linecap="round" />
+  <path d="M55 130 Q100 70 145 130" stroke="#A9DFBF" stroke-width="16" fill="none" stroke-linecap="round" opacity="0.6" />
+
+  <!-- Chain link pattern on body -->
+  <ellipse cx="74"  cy="116" rx="9" ry="6" fill="none" stroke="#1A8449" stroke-width="2" />
+  <ellipse cx="92"  cy="93"  rx="9" ry="6" fill="none" stroke="#1A8449" stroke-width="2" />
+  <ellipse cx="112" cy="80"  rx="9" ry="6" fill="none" stroke="#1A8449" stroke-width="2" />
+  <ellipse cx="130" cy="96"  rx="9" ry="6" fill="none" stroke="#1A8449" stroke-width="2" />
+
+  <!-- Head -->
+  <circle cx="150" cy="128" r="22" fill="#2ECC71" stroke="#1A8449" stroke-width="2" />
+
+  <!-- Eyes, slit pupils -->
+  <circle cx="143" cy="122" r="7" fill="white" stroke="#1A1A1A" stroke-width="1" />
+  <circle cx="157" cy="122" r="7" fill="white" stroke="#1A1A1A" stroke-width="1" />
+  <ellipse cx="143" cy="122" rx="3" ry="6" fill="#1A1A1A" />
+  <ellipse cx="157" cy="122" rx="3" ry="6" fill="#1A1A1A" />
+  <circle cx="144" cy="120" r="1.5" fill="white" />
+  <circle cx="158" cy="120" r="1.5" fill="white" />
+
+  <!-- Tongue -->
+  <line x1="150" y1="145" x2="144" y2="154" stroke="#E74C3C" stroke-width="2" stroke-linecap="round" />
+  <line x1="150" y1="145" x2="156" y2="154" stroke="#E74C3C" stroke-width="2" stroke-linecap="round" />
+
+  <!-- Mouth (idle) -->
+  <ellipse cx="150" cy="142" rx="12" ry="5" fill="black" />
+</svg>

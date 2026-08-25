@@ -1,0 +1,67 @@
+<!--
+  DashCheetah — squad hero, default pose (stage 2 "controlled", emotion idle).
+  Extracted from J:/ESL Website Project/esl-super-squad-v2/src/components/characters/movable/DashCheetahV2.tsx
+  (source read-only, not modified). See _ReferenceSource/movable/DashCheetahV2.tsx for the full
+  parametric source (stage/emotion variants, speed lines) and characterStyles.css for animations.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="200" viewBox="0 0 160 200" overflow="visible">
+  <style>
+    .head.cheetah { fill: #F4A261; }
+    .body.cheetah { fill: #E8955C; }
+    .ear  { fill: #F4A261; }
+    .eye  { fill: #1A1A1A; }
+    .arm  { fill: #D97E48; }
+    .leg  { fill: #D97E48; }
+    .spot { fill: #7B3F00; opacity: 0.55; }
+    .mouth { stroke: #1A1A1A; stroke-width: 2.5; stroke-linecap: round; }
+  </style>
+
+  <!-- Ears -->
+  <circle cx="53"  cy="32" r="14" class="ear" />
+  <circle cx="107" cy="32" r="14" class="ear" />
+  <circle cx="53"  cy="32" r="8"  fill="#E9C3A0" opacity="0.6" />
+  <circle cx="107" cy="32" r="8"  fill="#E9C3A0" opacity="0.6" />
+
+  <!-- Head -->
+  <circle cx="80" cy="58" r="36" class="head cheetah" />
+
+  <!-- Tear marks -->
+  <path d="M67 72 Q64 80 62 88" fill="none" stroke="#C1440E" stroke-width="1.8" stroke-linecap="round" opacity="0.6" />
+  <path d="M93 72 Q96 80 98 88" fill="none" stroke="#C1440E" stroke-width="1.8" stroke-linecap="round" opacity="0.6" />
+
+  <!-- Eyes -->
+  <circle cx="65" cy="55" r="7" class="eye" />
+  <circle cx="95" cy="55" r="7" class="eye" />
+  <circle cx="67" cy="52" r="2.5" fill="white" />
+  <circle cx="97" cy="52" r="2.5" fill="white" />
+
+  <!-- Nose -->
+  <ellipse cx="80" cy="72" rx="5" ry="4" fill="#C1440E" opacity="0.8" />
+
+  <!-- Mouth (idle) -->
+  <line x1="70" y1="82" x2="90" y2="82" class="mouth" />
+
+  <!-- Body -->
+  <ellipse cx="80" cy="128" rx="45" ry="38" class="body cheetah" />
+  <circle cx="68"  cy="118" r="5" class="spot" />
+  <circle cx="94"  cy="112" r="5" class="spot" />
+  <circle cx="83"  cy="135" r="5" class="spot" />
+  <circle cx="62"  cy="138" r="4" class="spot" />
+  <circle cx="100" cy="135" r="4" class="spot" />
+
+  <!-- Arms -->
+  <rect x="30"  y="105" width="16" height="42" rx="8" class="arm left" />
+  <rect x="114" y="105" width="16" height="42" rx="8" class="arm right" />
+  <circle cx="38"  cy="150" r="9" fill="#D97E48" />
+  <circle cx="122" cy="150" r="9" fill="#D97E48" />
+
+  <!-- Legs -->
+  <rect x="56" y="160" width="16" height="36" rx="8" class="leg left" />
+  <rect x="88" y="160" width="16" height="36" rx="8" class="leg right" />
+  <ellipse cx="64"  cy="196" rx="12" ry="6" fill="#C86A30" />
+  <ellipse cx="96"  cy="196" rx="12" ry="6" fill="#C86A30" />
+
+  <!-- Tail -->
+  <path d="M 118 130 Q 140 120 148 135 Q 152 148 142 152" fill="none" stroke="#F4A261" stroke-width="8" stroke-linecap="round" />
+  <circle cx="142" cy="152" r="6" fill="#7B3F00" opacity="0.6" />
+</svg>

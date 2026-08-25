@@ -1,0 +1,151 @@
+{
+  "levelIndex": 0,
+  "name": "Level 1 - First Steps",
+  "stageIndex": 0,
+  "worldWidth": 150,
+  "spawn": [
+    -8,
+    -0.5
+  ],
+  "finish": [
+    145,
+    0
+  ],
+  "finishSize": [
+    2,
+    3
+  ],
+  "requiredCollectibles": 0,
+  "tutorialLine": "Drift toward the glowing exit. Jump unlocks soon.",
+  "platforms": [
+    {
+      "name": "Floor_Main",
+      "position": [
+        65,
+        -2
+      ],
+      "size": [
+        170,
+        2
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    }
+  ],
+  "hazards": [],
+  "collectibles": [
+    {
+      "name": "VocabGem_1",
+      "position": [
+        0,
+        -0.5
+      ]
+    },
+    {
+      "name": "VocabGem_2",
+      "position": [
+        30,
+        -0.5
+      ]
+    },
+    {
+      "name": "VocabGem_3",
+      "position": [
+        60,
+        -0.5
+      ]
+    },
+    {
+      "name": "VocabGem_4",
+      "position": [
+        90,
+        -0.5
+      ]
+    },
+    {
+      "name": "VocabGem_5",
+      "position": [
+        120,
+        -0.5
+      ]
+    }
+  ],
+  "growthPickups": [],
+  "checkpoints": [
+    {
+      "name": "Checkpoint_Mid",
+      "position": [
+        70,
+        -0.5
+      ]
+    }
+  ],
+  "rolePads": [],
+  "roleGates": [],
+  "windZones": [
+    {
+      "name": "Current_1",
+      "position": [
+        10,
+        2
+      ],
+      "size": [
+        50,
+        6
+      ],
+      "force": [
+        6,
+        0
+      ]
+    },
+    {
+      "name": "Current_2",
+      "position": [
+        65,
+        2
+      ],
+      "size": [
+        50,
+        6
+      ],
+      "force": [
+        7,
+        0
+      ]
+    },
+    {
+      "name": "Current_3",
+      "position": [
+        115,
+        2
+      ],
+      "size": [
+        50,
+        6
+      ],
+      "force": [
+        8,
+        0
+      ]
+    }
+  ],
+  "villainGates": [
+    {
+      "encounterId": "echofox_intro",
+      "position": [
+        132,
+        -0.5
+      ],
+      "gateSize": [
+        2,
+        3
+      ],
+      "villain": "EchoFox",
+      "cefrLevel": "A1"
+    }
+  ]
+}

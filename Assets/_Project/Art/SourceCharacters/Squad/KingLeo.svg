@@ -1,0 +1,63 @@
+<!--
+  KingLeo — squad hero, default pose (stage 2 "brave", emotion idle, not scared).
+  Extracted from J:/ESL Website Project/esl-super-squad-v2/src/components/characters/movable/KingLeoV2.tsx
+  (source read-only, not modified). See _ReferenceSource/movable/KingLeoV2.tsx for the full
+  parametric source (stage 1 is always scared, stage 3 fearless w/ gold aura) and characterStyles.css.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="240" viewBox="0 0 220 240" overflow="visible">
+  <style>
+    .mane { fill: #F4A261; }
+    .face.lion { fill: #FFCC80; }
+    .eye-white { fill: #FFFFFF; }
+    .eye  { fill: #1A1A1A; }
+    .leg  { fill: #F4A261; }
+    .nose { fill: #E64A19; }
+    .mouth { fill: none; stroke: #1A1A1A; stroke-width: 2.5; stroke-linecap: round; }
+  </style>
+
+  <!-- Mane -->
+  <circle cx="110" cy="100" r="62" class="mane" />
+  <circle cx="110" cy="100" r="62" fill="none" stroke="#E8955C" stroke-width="8" opacity="0.3" />
+  <circle cx="110" cy="100" r="52" fill="none" stroke="#D97E48" stroke-width="4" opacity="0.2" />
+
+  <!-- Face -->
+  <circle cx="110" cy="100" r="42" class="face lion" />
+
+  <!-- Ears -->
+  <ellipse cx="72"  cy="52" rx="14" ry="16" fill="#F4A261" />
+  <ellipse cx="148" cy="52" rx="14" ry="16" fill="#F4A261" />
+  <ellipse cx="72"  cy="54" rx="8"  ry="10" fill="#FCA5A5" opacity="0.6" />
+  <ellipse cx="148" cy="54" rx="8"  ry="10" fill="#FCA5A5" opacity="0.6" />
+
+  <!-- Eyes -->
+  <circle cx="95"  cy="88" r="8" class="eye-white" stroke="#1A1A1A" stroke-width="1.5" />
+  <circle cx="125" cy="88" r="8" class="eye-white" stroke="#1A1A1A" stroke-width="1.5" />
+  <circle cx="95"  cy="89" r="4" class="eye" />
+  <circle cx="125" cy="89" r="4" class="eye" />
+  <circle cx="97"  cy="86" r="2" fill="white" />
+  <circle cx="127" cy="86" r="2" fill="white" />
+
+  <!-- Muzzle -->
+  <ellipse cx="110" cy="116" rx="22" ry="16" fill="#FFCC80" />
+
+  <!-- Nose -->
+  <ellipse cx="110" cy="108" rx="8" ry="6" class="nose" />
+  <ellipse cx="107" cy="109" rx="2.5" ry="1.5" fill="#BF360C" />
+  <ellipse cx="113" cy="109" rx="2.5" ry="1.5" fill="#BF360C" />
+
+  <!-- Mouth (idle smile, Leo's natural expression) -->
+  <path d="M90 126 Q110 140 130 126" class="mouth" />
+
+  <!-- Body -->
+  <ellipse cx="110" cy="185" rx="45" ry="35" fill="#F4A261" />
+
+  <!-- Legs -->
+  <rect x="80"  y="195" width="22" height="42" rx="10" class="leg left" />
+  <rect x="118" y="195" width="22" height="42" rx="10" class="leg right" />
+  <ellipse cx="91"  cy="237" rx="14" ry="7" fill="#E8955C" />
+  <ellipse cx="129" cy="237" rx="14" ry="7" fill="#E8955C" />
+
+  <!-- Tail -->
+  <path d="M 152 182 Q 175 170 180 186 Q 182 200 170 204" fill="none" stroke="#F4A261" stroke-width="10" stroke-linecap="round" />
+  <ellipse cx="170" cy="204" rx="10" ry="8" fill="#E8955C" />
+</svg>

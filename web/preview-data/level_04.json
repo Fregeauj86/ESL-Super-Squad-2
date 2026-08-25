@@ -1,0 +1,184 @@
+{
+  "levelIndex": 4,
+  "name": "Level 5 - Deep Diver",
+  "stageIndex": 4,
+  "worldWidth": 40,
+  "spawn": [
+    -10,
+    -22
+  ],
+  "finish": [
+    0,
+    44
+  ],
+  "finishSize": [
+    2,
+    3
+  ],
+  "requiredCollectibles": 0,
+  "tutorialLine": "Grab confidence stars to get stronger.",
+  "platforms": [
+    {
+      "name": "Shaft_Left",
+      "position": [
+        -16,
+        0
+      ],
+      "size": [
+        5,
+        66
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Shaft_Right",
+      "position": [
+        16,
+        0
+      ],
+      "size": [
+        5,
+        66
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Platform_1",
+      "position": [
+        0,
+        -12
+      ],
+      "size": [
+        14,
+        2
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Platform_2",
+      "position": [
+        0,
+        6
+      ],
+      "size": [
+        14,
+        2
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Platform_3",
+      "position": [
+        0,
+        24
+      ],
+      "size": [
+        14,
+        2
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Exit_Ledge",
+      "position": [
+        0,
+        41
+      ],
+      "size": [
+        16,
+        3
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    }
+  ],
+  "hazards": [],
+  "collectibles": [
+    {
+      "name": "VocabGem_1",
+      "position": [
+        -10,
+        -12
+      ]
+    },
+    {
+      "name": "VocabGem_2",
+      "position": [
+        10,
+        6
+      ]
+    },
+    {
+      "name": "VocabGem_3",
+      "position": [
+        -10,
+        24
+      ]
+    }
+  ],
+  "growthPickups": [
+    {
+      "name": "ConfidenceStar_1",
+      "position": [
+        0,
+        -6
+      ]
+    },
+    {
+      "name": "ConfidenceStar_2",
+      "position": [
+        0,
+        12
+      ]
+    },
+    {
+      "name": "ConfidenceStar_3",
+      "position": [
+        0,
+        30
+      ]
+    }
+  ],
+  "checkpoints": [
+    {
+      "name": "Checkpoint_Mid",
+      "position": [
+        0,
+        6
+      ]
+    }
+  ],
+  "rolePads": [],
+  "roleGates": [],
+  "windZones": [],
+  "villainGates": []
+}

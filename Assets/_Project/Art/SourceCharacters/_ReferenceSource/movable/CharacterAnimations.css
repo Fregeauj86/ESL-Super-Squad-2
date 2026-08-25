@@ -1,0 +1,150 @@
+/* =============================================================================
+   Movable Character Animations — ESL Super Squad
+   Class-based states: idle | talking | walking | strong | fast | scared | slow
+   ============================================================================= */
+
+.character {
+  transition: transform 0.2s ease;
+  overflow: visible;
+}
+
+/* ── Eyes: always blinking ────────────────────────────────────────────────── */
+.character .eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: mv-blink 4s infinite;
+}
+.character .eye:nth-of-type(2) {
+  animation-delay: 0.05s;
+}
+
+@keyframes mv-blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95%, 99%      { transform: scaleY(0.08); }
+}
+
+/* ── Mouth: talking state ─────────────────────────────────────────────────── */
+.character .mouth {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.character.talking .mouth {
+  animation: mv-talk 0.25s ease-in-out infinite;
+}
+
+@keyframes mv-talk {
+  0%, 100% { transform: scaleY(1); }
+  50%      { transform: scaleY(0.15); }
+}
+
+/* ── Idle: gentle float ────────────────────────────────────────────────────── */
+.character.idle {
+  animation: mv-float 2.4s ease-in-out infinite;
+}
+
+@keyframes mv-float {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-6px); }
+}
+
+/* ── Walking: side-to-side bounce ─────────────────────────────────────────── */
+.character.walking {
+  animation: mv-walk 0.32s ease-in-out infinite alternate;
+}
+
+@keyframes mv-walk {
+  0%   { transform: translateX(0px) rotate(-3deg); }
+  100% { transform: translateX(5px) rotate(3deg); }
+}
+
+/* ── Strong (Milo) ─────────────────────────────────────────────────────────── */
+.character.milo.strong {
+  animation: mv-strong-pulse 0.55s ease-in-out infinite;
+}
+
+@keyframes mv-strong-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.1); }
+}
+
+/* ── Fast (Timmy) ─────────────────────────────────────────────────────────── */
+.character.timmy.fast {
+  animation: mv-fast-shake 0.14s ease-in-out infinite;
+}
+
+@keyframes mv-fast-shake {
+  0%   { transform: translateX(-3px) rotate(-4deg); }
+  100% { transform: translateX(3px) rotate(4deg); }
+}
+
+/* ── Scared: shaking ──────────────────────────────────────────────────────── */
+.character.scared {
+  animation: mv-scared 0.18s ease-in-out infinite;
+}
+
+@keyframes mv-scared {
+  0%, 100% { transform: rotate(0deg); }
+  25%      { transform: rotate(-5deg) translateX(-3px); }
+  75%      { transform: rotate(5deg) translateX(3px); }
+}
+
+/* ── Slow: heavy drift ────────────────────────────────────────────────────── */
+.character.slow {
+  animation: mv-float 5s ease-in-out infinite;
+}
+
+/* ── Winning: celebrate ───────────────────────────────────────────────────── */
+.character.winning {
+  animation: mv-celebrate 0.5s ease-in-out infinite;
+}
+
+@keyframes mv-celebrate {
+  0%, 100% { transform: rotate(-6deg) scale(1.05); }
+  50%      { transform: rotate(6deg) scale(1.12); }
+}
+
+/* ── Cheetah (Dash): slow, low-energy ────────────────────────────────────── */
+.character.cheetah.idle {
+  animation: mv-slow-idle 3.5s ease-in-out infinite;
+}
+
+.character.cheetah.walking {
+  animation: mv-slow-walk 1.2s ease-in-out infinite alternate;
+}
+
+.character.cheetah.slow {
+  animation: mv-slow-idle 5s ease-in-out infinite;
+}
+
+@keyframes mv-slow-idle {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(2px); }
+}
+
+@keyframes mv-slow-walk {
+  0%   { transform: translateX(0px) rotate(-1deg); }
+  100% { transform: translateX(3px) rotate(1deg); }
+}
+
+/* ── Eagle (Sky / Groundwing): flat wings, stays low ─────────────────────── */
+.character.eagle.idle {
+  animation: mv-low-flap 2.2s ease-in-out infinite;
+}
+
+.character.eagle.walking {
+  animation: mv-eagle-walk 0.6s ease-in-out infinite alternate;
+}
+
+.character.eagle.low {
+  animation: mv-low-flap 3.5s ease-in-out infinite;
+}
+
+@keyframes mv-low-flap {
+  0%, 100% { transform: translateY(0px) scaleY(1); }
+  50%      { transform: translateY(3px) scaleY(0.97); }
+}
+
+@keyframes mv-eagle-walk {
+  0%   { transform: translateX(0px) rotate(-2deg); }
+  100% { transform: translateX(4px) rotate(2deg); }
+}

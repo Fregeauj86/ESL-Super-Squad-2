@@ -1,0 +1,89 @@
+<!--
+  DrImperfecto — squad hero (redeemed villain-scientist mentor), default pose
+  (stage 2, state idle, strict=true → combed hair + furrowed brows + white coat).
+  Extracted from J:/ESL Website Project/esl-super-squad-v2/src/components/characters/movable/DrImperfectoV2.tsx
+  (source read-only, not modified). See _ReferenceSource/movable/DrImperfectoV2.tsx for the full
+  parametric source (stage 3 = wild hair + warm blue mentor coat) and characterStyles.css.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="220" viewBox="0 0 180 220" overflow="visible">
+  <style>
+    .hair { fill: #EEEEEE; }
+    .head { fill: #FFCC80; }
+    .glasses { fill: #374151; }
+    .glasses-bridge { stroke: #374151; stroke-width: 2; }
+    .eye { fill: #1A1A1A; }
+    .labcoat { fill: #FFFFFF; stroke: #D1D5DB; stroke-width: 1.5; }
+    .coat-line { stroke: #D1D5DB; stroke-width: 1.5; stroke-dasharray: 4 3; }
+    .button.red    { fill: #EF4444; }
+    .button.yellow { fill: #FBBF24; }
+    .button.green  { fill: #10B981; }
+    .arm { fill: #FFFFFF; stroke: #D1D5DB; stroke-width: 1.2; }
+    .leg { fill: #374151; }
+    .mouth { stroke: #1A1A1A; stroke-width: 2.5; stroke-linecap: round; }
+  </style>
+
+  <!-- Strict: neat combed hair block -->
+  <rect x="55" y="12" width="70" height="28" rx="10" class="hair" />
+
+  <!-- Head -->
+  <rect x="58" y="32" width="64" height="62" rx="12" class="head" />
+
+  <!-- Strict eyebrows (furrowed) -->
+  <path d="M66 50 Q77 45 88 50" fill="none" stroke="#616161" stroke-width="3" stroke-linecap="round" />
+  <path d="M92 50 Q103 45 114 50" fill="none" stroke="#616161" stroke-width="3" stroke-linecap="round" />
+
+  <!-- Glasses frames -->
+  <rect x="66" y="52" width="20" height="12" rx="4" class="glasses" opacity="0.85" />
+  <rect x="94" y="52" width="20" height="12" rx="4" class="glasses" opacity="0.85" />
+  <rect x="67" y="53" width="18" height="10" rx="3" fill="#FFFDE7" opacity="0.5" />
+  <rect x="95" y="53" width="18" height="10" rx="3" fill="#FFFDE7" opacity="0.5" />
+  <line x1="86" y1="58" x2="94" y2="58" class="glasses-bridge" />
+  <line x1="66" y1="58" x2="58" y2="56" class="glasses-bridge" />
+  <line x1="114" y1="58" x2="122" y2="56" class="glasses-bridge" />
+
+  <!-- Eyes -->
+  <circle cx="76"  cy="58" r="4" class="eye" />
+  <circle cx="104" cy="58" r="4" class="eye" />
+  <circle cx="77.5" cy="56.5" r="1.5" fill="white" />
+  <circle cx="105.5" cy="56.5" r="1.5" fill="white" />
+
+  <!-- Thin moustache -->
+  <path d="M80 76 Q90 73 100 76" fill="none" stroke="#757575" stroke-width="2.2" stroke-linecap="round" />
+
+  <!-- Mouth (idle) -->
+  <line x1="76" y1="82" x2="104" y2="82" class="mouth" />
+
+  <!-- Lab coat body -->
+  <rect x="42" y="97" width="96" height="88" rx="14" class="labcoat" />
+
+  <!-- Coat lapels -->
+  <path d="M90 97 L76 116 L90 112 Z" fill="#F9FAFB" stroke="#D1D5DB" stroke-width="1" />
+  <path d="M90 97 L104 116 L90 112 Z" fill="#F9FAFB" stroke="#D1D5DB" stroke-width="1" />
+
+  <!-- Center seam -->
+  <line x1="90" y1="112" x2="90" y2="185" class="coat-line" />
+
+  <!-- Pocket + pen -->
+  <rect x="54" y="110" width="18" height="14" rx="3" fill="none" stroke="#D1D5DB" stroke-width="1.2" />
+  <line x1="59" y1="110" x2="57" y2="104" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" />
+  <line x1="63" y1="110" x2="61" y2="104" stroke="#EF4444" stroke-width="2" stroke-linecap="round" />
+
+  <!-- Buttons -->
+  <circle cx="90" cy="122" r="4.5" class="button red" />
+  <circle cx="90" cy="138" r="4.5" class="button yellow" />
+  <circle cx="90" cy="154" r="4.5" class="button green" />
+
+  <!-- Arms -->
+  <rect x="18" y="108" width="28" height="12" rx="6" class="arm" />
+  <rect x="134" y="108" width="28" height="12" rx="6" class="arm" />
+  <circle cx="16"  cy="114" r="8" fill="#FFCC80" stroke="#E0A060" stroke-width="1.2" />
+  <circle cx="164" cy="114" r="8" fill="#FFCC80" stroke="#E0A060" stroke-width="1.2" />
+
+  <!-- Legs -->
+  <rect x="62"  y="183" width="18" height="32" rx="8" class="leg left" />
+  <rect x="100" y="183" width="18" height="32" rx="8" class="leg right" />
+
+  <!-- Shoes -->
+  <ellipse cx="71"  cy="215" rx="13" ry="6" fill="#1F2937" />
+  <ellipse cx="109" cy="215" rx="13" ry="6" fill="#1F2937" />
+</svg>

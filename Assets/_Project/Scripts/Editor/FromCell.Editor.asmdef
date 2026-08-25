@@ -1,0 +1,20 @@
+{
+    "name": "FromCell.Editor",
+    "rootNamespace": "FromCell.Editor",
+    "references": [
+        "FromCell.Runtime",
+        "Unity.TextMeshPro",
+        "Unity.Burst"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,229 @@
+{
+  "levelIndex": 1,
+  "name": "Level 2 - Steady Scout",
+  "stageIndex": 1,
+  "worldWidth": 160,
+  "spawn": [
+    -8,
+    0
+  ],
+  "finish": [
+    155,
+    2
+  ],
+  "finishSize": [
+    2,
+    3
+  ],
+  "requiredCollectibles": 3,
+  "tutorialLine": "Collect 3 vocabulary gems before you leave.",
+  "platforms": [
+    {
+      "name": "Ground_Start",
+      "position": [
+        -6,
+        -1.5
+      ],
+      "size": [
+        10,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Branch_A",
+      "position": [
+        20,
+        1
+      ],
+      "size": [
+        24,
+        0.800000011920929
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Branch_B",
+      "position": [
+        55,
+        3
+      ],
+      "size": [
+        28,
+        0.800000011920929
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Ground_Mid",
+      "position": [
+        95,
+        2
+      ],
+      "size": [
+        20,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Ground_Approach",
+      "position": [
+        135,
+        2.5
+      ],
+      "size": [
+        24,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Ground_End",
+      "position": [
+        158,
+        3
+      ],
+      "size": [
+        14,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    }
+  ],
+  "hazards": [
+    {
+      "name": "Pit_Hazard_1",
+      "position": [
+        12,
+        -3
+      ],
+      "size": [
+        14,
+        1
+      ]
+    },
+    {
+      "name": "Pit_Hazard_2",
+      "position": [
+        78,
+        -3
+      ],
+      "size": [
+        16,
+        1
+      ]
+    }
+  ],
+  "collectibles": [
+    {
+      "name": "VocabGem_1",
+      "position": [
+        0,
+        1
+      ]
+    },
+    {
+      "name": "VocabGem_2",
+      "position": [
+        20,
+        3
+      ]
+    },
+    {
+      "name": "VocabGem_3",
+      "position": [
+        55,
+        5
+      ]
+    },
+    {
+      "name": "VocabGem_4",
+      "position": [
+        95,
+        4
+      ]
+    },
+    {
+      "name": "VocabGem_5",
+      "position": [
+        135,
+        4.5
+      ]
+    }
+  ],
+  "growthPickups": [],
+  "checkpoints": [
+    {
+      "name": "Checkpoint_Mid",
+      "position": [
+        55,
+        5
+      ]
+    }
+  ],
+  "rolePads": [],
+  "roleGates": [],
+  "windZones": [
+    {
+      "name": "Current_Branch",
+      "position": [
+        20,
+        5
+      ],
+      "size": [
+        24,
+        6
+      ],
+      "force": [
+        4,
+        0
+      ]
+    }
+  ],
+  "villainGates": [
+    {
+      "encounterId": "builderbear_sentences",
+      "position": [
+        146,
+        2.5
+      ],
+      "gateSize": [
+        2,
+        3
+      ],
+      "villain": "BuilderBear",
+      "cefrLevel": "A2"
+    }
+  ]
+}

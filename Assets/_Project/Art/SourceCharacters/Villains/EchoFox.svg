@@ -1,0 +1,20 @@
+<!--
+  EchoFox — villain (A1, "Echo & Repeat"), default pose (idle, not talking).
+  Extracted from J:/ESL Website Project/esl-super-squad-v2/src/components/characters/progression/EchoFoxChar.tsx
+  (source read-only, not modified).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 200 200" overflow="visible">
+  <!-- Head -->
+  <polygon points="100,40 150,100 50,100" fill="orange" />
+
+  <!-- Ears -->
+  <polygon points="80,50 95,20 110,50" fill="darkorange" />
+  <polygon points="120,50 135,20 150,50" fill="darkorange" />
+
+  <!-- Eyes -->
+  <circle cx="80" cy="80" r="5" fill="black" />
+  <circle cx="120" cy="80" r="5" fill="black" />
+
+  <!-- Mouth (idle) -->
+  <ellipse cx="100" cy="110" rx="18" ry="6" fill="black" />
+</svg>

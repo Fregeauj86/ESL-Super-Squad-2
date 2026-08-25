@@ -1,0 +1,239 @@
+{
+  "levelIndex": 3,
+  "name": "Level 4 - Gentle Giant",
+  "stageIndex": 3,
+  "worldWidth": 150,
+  "spawn": [
+    -9,
+    -1
+  ],
+  "finish": [
+    148,
+    4
+  ],
+  "finishSize": [
+    2,
+    3
+  ],
+  "requiredCollectibles": 0,
+  "tutorialLine": "Weak jump unlocked. Climb toward the outpost.",
+  "platforms": [
+    {
+      "name": "Ground_Start",
+      "position": [
+        -7,
+        -3
+      ],
+      "size": [
+        8,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Step1",
+      "position": [
+        5,
+        -1
+      ],
+      "size": [
+        6,
+        0.6000000238418579
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Step2",
+      "position": [
+        20,
+        1
+      ],
+      "size": [
+        6,
+        0.6000000238418579
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Step3",
+      "position": [
+        35,
+        3
+      ],
+      "size": [
+        6,
+        0.6000000238418579
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Step4",
+      "position": [
+        55,
+        3.5
+      ],
+      "size": [
+        10,
+        0.6000000238418579
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Step5",
+      "position": [
+        80,
+        3
+      ],
+      "size": [
+        8,
+        0.6000000238418579
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Step6",
+      "position": [
+        100,
+        2
+      ],
+      "size": [
+        8,
+        0.6000000238418579
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Ground_Approach",
+      "position": [
+        125,
+        3
+      ],
+      "size": [
+        20,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Ground_End",
+      "position": [
+        148,
+        3.5
+      ],
+      "size": [
+        10,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    }
+  ],
+  "hazards": [
+    {
+      "name": "Tide_Pool",
+      "position": [
+        20,
+        -4.5
+      ],
+      "size": [
+        80,
+        1
+      ]
+    }
+  ],
+  "collectibles": [
+    {
+      "name": "VocabGem_1",
+      "position": [
+        5,
+        0
+      ]
+    },
+    {
+      "name": "VocabGem_2",
+      "position": [
+        35,
+        4
+      ]
+    },
+    {
+      "name": "VocabGem_3",
+      "position": [
+        80,
+        4
+      ]
+    }
+  ],
+  "growthPickups": [],
+  "checkpoints": [
+    {
+      "name": "Checkpoint_Mid",
+      "position": [
+        55,
+        4.5
+      ]
+    }
+  ],
+  "rolePads": [],
+  "roleGates": [],
+  "windZones": [],
+  "villainGates": [
+    {
+      "encounterId": "questionowl_questions",
+      "position": [
+        139,
+        3.5
+      ],
+      "gateSize": [
+        2,
+        3
+      ],
+      "villain": "QuestionOwl",
+      "cefrLevel": "B1"
+    }
+  ]
+}

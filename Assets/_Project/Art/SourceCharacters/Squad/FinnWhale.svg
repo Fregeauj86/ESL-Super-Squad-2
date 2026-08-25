@@ -1,0 +1,44 @@
+<!--
+  FinnWhale — squad hero, default pose (stage 2 "medium", emotion idle, not swimming).
+  Extracted from J:/ESL Website Project/esl-super-squad-v2/src/components/characters/movable/FinnWhaleV2.tsx
+  (source read-only, not modified). See _ReferenceSource/movable/FinnWhaleV2.tsx for the full
+  parametric source (stage/emotion variants, swim pose) and characterStyles.css for animations.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" overflow="visible">
+  <style>
+    .body.whale { fill: #0288D1; }
+    .tail  { fill: #0277BD; }
+    .eye   { fill: #1A1A1A; }
+    .spout { fill: #B3E5FC; }
+    .mouth { stroke: #1A1A1A; stroke-width: 2.5; stroke-linecap: round; }
+  </style>
+
+  <!-- Tail flukes -->
+  <polygon points="30,100 8,78 8,122" class="tail" />
+  <path d="M30 100 Q18 88 8 78"  fill="none" stroke="#0277BD" stroke-width="2" />
+  <path d="M30 100 Q18 112 8 122" fill="none" stroke="#0277BD" stroke-width="2" />
+
+  <!-- Body -->
+  <ellipse cx="122" cy="112" rx="90" ry="52" class="body whale" />
+  <ellipse cx="115" cy="124" rx="65" ry="30" fill="#B3E5FC" opacity="0.5" />
+
+  <!-- Dorsal fin -->
+  <path d="M 108 62 Q 120 44 132 62" fill="#0277BD" stroke="#01579B" stroke-width="1.5" />
+
+  <!-- Pectoral fin -->
+  <path d="M 178 106 Q 202 92 200 114 Q 188 120 178 116 Z" fill="#0288D1" stroke="#01579B" stroke-width="1.2" />
+
+  <!-- Blowhole + spout -->
+  <ellipse cx="108" cy="66" rx="8" ry="5" fill="#0277BD" stroke="#01579B" stroke-width="1.5" />
+  <rect x="104" y="30" width="8" height="36" rx="4" class="spout" opacity="0.8" />
+  <circle cx="108" cy="24" r="12" class="spout" opacity="0.6" />
+  <circle cx="108" cy="16" r="8"  class="spout" opacity="0.35" />
+
+  <!-- Eye -->
+  <ellipse cx="172" cy="102" rx="10" ry="9" fill="white" stroke="#1A1A1A" stroke-width="1.5" />
+  <circle cx="172" cy="102" r="6" class="eye" />
+  <circle cx="174" cy="100" r="2" fill="white" />
+
+  <!-- Mouth (idle smile) -->
+  <path d="M148 132 Q165 144 192 136" fill="none" class="mouth" />
+</svg>

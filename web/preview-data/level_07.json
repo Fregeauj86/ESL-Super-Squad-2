@@ -1,0 +1,212 @@
+{
+  "levelIndex": 7,
+  "name": "Level 8 - Power Hop",
+  "stageIndex": 7,
+  "worldWidth": 160,
+  "spawn": [
+    -8,
+    0
+  ],
+  "finish": [
+    155,
+    12
+  ],
+  "finishSize": [
+    2,
+    3
+  ],
+  "requiredCollectibles": 0,
+  "tutorialLine": "Double jump is online. Go explore upward.",
+  "platforms": [
+    {
+      "name": "Ground_Start",
+      "position": [
+        -6,
+        -1
+      ],
+      "size": [
+        10,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Ground_Mid",
+      "position": [
+        20,
+        2
+      ],
+      "size": [
+        10,
+        0.800000011920929
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Ledge_1",
+      "position": [
+        45,
+        5
+      ],
+      "size": [
+        8,
+        0.800000011920929
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Ledge_2",
+      "position": [
+        70,
+        8
+      ],
+      "size": [
+        8,
+        0.800000011920929
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "High_Ledge",
+      "position": [
+        100,
+        11
+      ],
+      "size": [
+        10,
+        0.800000011920929
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Ground_Approach",
+      "position": [
+        130,
+        11.5
+      ],
+      "size": [
+        16,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Ground_End",
+      "position": [
+        155,
+        12.5
+      ],
+      "size": [
+        14,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    }
+  ],
+  "hazards": [
+    {
+      "name": "Fall_Zone",
+      "position": [
+        60,
+        -4
+      ],
+      "size": [
+        130,
+        1
+      ]
+    }
+  ],
+  "collectibles": [
+    {
+      "name": "VocabGem_1",
+      "position": [
+        20,
+        4
+      ]
+    },
+    {
+      "name": "VocabGem_2",
+      "position": [
+        45,
+        7
+      ]
+    },
+    {
+      "name": "VocabGem_3",
+      "position": [
+        70,
+        10
+      ]
+    },
+    {
+      "name": "VocabGem_4",
+      "position": [
+        100,
+        13
+      ]
+    }
+  ],
+  "growthPickups": [],
+  "checkpoints": [
+    {
+      "name": "Checkpoint_Mid",
+      "position": [
+        70,
+        10
+      ]
+    }
+  ],
+  "rolePads": [],
+  "roleGates": [],
+  "windZones": [],
+  "villainGates": [
+    {
+      "encounterId": "debatehawk_opinions",
+      "position": [
+        146,
+        13
+      ],
+      "gateSize": [
+        2,
+        3
+      ],
+      "villain": "DebateHawk",
+      "cefrLevel": "C1"
+    }
+  ]
+}

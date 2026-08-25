@@ -1,0 +1,225 @@
+{
+  "levelIndex": 8,
+  "name": "Level 9 - Master Mentor",
+  "stageIndex": 8,
+  "worldWidth": 190,
+  "spawn": [
+    -10,
+    0
+  ],
+  "finish": [
+    185,
+    1
+  ],
+  "finishSize": [
+    2,
+    3
+  ],
+  "requiredCollectibles": 0,
+  "tutorialLine": "Dash through the gaps. Mind the pit.",
+  "platforms": [
+    {
+      "name": "Runway_Start",
+      "position": [
+        -6,
+        -1
+      ],
+      "size": [
+        12,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Runway_1",
+      "position": [
+        20,
+        -1
+      ],
+      "size": [
+        12,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Gap_A",
+      "position": [
+        40,
+        -1
+      ],
+      "size": [
+        4,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Runway_2",
+      "position": [
+        60,
+        -1
+      ],
+      "size": [
+        12,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Gap_B",
+      "position": [
+        80,
+        -1
+      ],
+      "size": [
+        4,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Runway_3",
+      "position": [
+        100,
+        -1
+      ],
+      "size": [
+        12,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Gap_C",
+      "position": [
+        120,
+        -1
+      ],
+      "size": [
+        4,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Runway_4",
+      "position": [
+        145,
+        0
+      ],
+      "size": [
+        16,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    },
+    {
+      "name": "Runway_End",
+      "position": [
+        183,
+        1
+      ],
+      "size": [
+        16,
+        1
+      ],
+      "color": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.4000000059604645,
+        1
+      ]
+    }
+  ],
+  "hazards": [
+    {
+      "name": "Pit",
+      "position": [
+        75,
+        -4
+      ],
+      "size": [
+        120,
+        1
+      ]
+    }
+  ],
+  "collectibles": [
+    {
+      "name": "VocabGem_1",
+      "position": [
+        20,
+        1
+      ]
+    },
+    {
+      "name": "VocabGem_2",
+      "position": [
+        60,
+        1
+      ]
+    },
+    {
+      "name": "VocabGem_3",
+      "position": [
+        100,
+        1
+      ]
+    }
+  ],
+  "growthPickups": [],
+  "checkpoints": [
+    {
+      "name": "Checkpoint_Mid",
+      "position": [
+        100,
+        1
+      ]
+    }
+  ],
+  "rolePads": [],
+  "roleGates": [],
+  "windZones": [],
+  "villainGates": []
+}

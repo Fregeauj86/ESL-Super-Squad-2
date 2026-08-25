@@ -1,0 +1,45 @@
+<!--
+  DebateHawk — villain (C1, "Express an Opinion"), default pose (idle, not talking).
+  Extracted from J:/ESL Website Project/esl-super-squad-v2/src/components/characters/progression/DebateHawkChar.tsx
+  (source read-only, not modified).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 200 200" overflow="visible">
+  <!-- Wings -->
+  <polygon points="50,128 100,62 150,128" fill="#444" />
+  <polygon points="50,128 22,118 60,145" fill="#333" />
+  <polygon points="150,128 178,118 140,145" fill="#333" />
+
+  <!-- Body -->
+  <circle cx="100" cy="118" r="42" fill="#555" />
+
+  <!-- White chest patch -->
+  <ellipse cx="100" cy="122" rx="22" ry="28" fill="#ddd" opacity="0.7" />
+
+  <!-- Eyes, sharp and focused -->
+  <circle cx="83"  cy="105" r="8" fill="white" stroke="#1A1A1A" stroke-width="1.5" />
+  <circle cx="117" cy="105" r="8" fill="white" stroke="#1A1A1A" stroke-width="1.5" />
+  <circle cx="83"  cy="105" r="5" fill="#D4A000" />
+  <circle cx="117" cy="105" r="5" fill="#D4A000" />
+  <circle cx="83.5"  cy="105" r="2.5" fill="black" />
+  <circle cx="117.5" cy="105" r="2.5" fill="black" />
+  <circle cx="85"  cy="103" r="1" fill="white" />
+  <circle cx="119" cy="103" r="1" fill="white" />
+
+  <!-- Fierce brow ridges -->
+  <path d="M76 98 Q83 95 90 99" fill="none" stroke="#1A1A1A" stroke-width="2.5" />
+  <path d="M110 99 Q117 95 124 98" fill="none" stroke="#1A1A1A" stroke-width="2.5" />
+
+  <!-- Hooked beak -->
+  <polygon points="100,112 90,126 110,126" fill="yellow" />
+  <path d="M98 122 Q100 128 104 126" fill="none" stroke="#C49A00" stroke-width="2" stroke-linecap="round" />
+
+  <!-- Mouth (idle) -->
+  <ellipse cx="100" cy="134" rx="16" ry="5" fill="black" />
+
+  <!-- Tail feathers -->
+  <path d="M85 158 Q78 172 74 188" stroke="#555" stroke-width="4" fill="none" stroke-linecap="round" />
+  <path d="M93 160 Q90 174 88 192" stroke="#555" stroke-width="4" fill="none" stroke-linecap="round" />
+  <path d="M100 161 Q100 176 100 194" stroke="#555" stroke-width="4" fill="none" stroke-linecap="round" />
+  <path d="M107 160 Q110 174 112 192" stroke="#555" stroke-width="4" fill="none" stroke-linecap="round" />
+  <path d="M115 158 Q122 172 126 188" stroke="#555" stroke-width="4" fill="none" stroke-linecap="round" />
+</svg>

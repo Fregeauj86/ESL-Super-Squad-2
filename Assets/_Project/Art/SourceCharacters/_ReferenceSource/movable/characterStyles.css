@@ -1,0 +1,590 @@
+/* =============================================================================
+   Abstract Character Styles — ESL Super Squad
+   SVG fills + strokes are driven entirely by CSS class selectors.
+   Boolean props (talking, walking) toggle class names on the wrapper div.
+   ============================================================================= */
+
+/* ── Wrapper ──────────────────────────────────────────────────────────────── */
+.character {
+  display: inline-block;
+  position: relative;
+  /* Idle float — gentle breathing bob for all characters */
+  animation: char-float 3s ease-in-out infinite;
+}
+@keyframes char-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-5px); }
+}
+
+/* ── Walking: gentle sway on the whole character ─────────────────────────── */
+.character.walk {
+  animation: abs-walk 0.32s ease-in-out infinite alternate;
+}
+@keyframes abs-walk {
+  0%   { transform: translateX(0px) rotate(-2deg); }
+  100% { transform: translateX(4px) rotate(2deg); }
+}
+
+/* ── Talking: slight body rock while speaking ─────────────────────────────── */
+.character.talking {
+  animation: char-talk-body 0.3s ease-in-out infinite;
+}
+@keyframes char-talk-body {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  35%      { transform: translateY(-2px) rotate(-1.5deg); }
+  70%      { transform: translateY(1px) rotate(1deg); }
+}
+
+/* ── Correct → bounce ─────────────────────────────────────────────────────── */
+.character.happy,
+.character.excited,
+.character.winning {
+  animation: char-bounce 0.55s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
+}
+@keyframes char-bounce {
+  0%, 100% { transform: translateY(0px); }
+  25%      { transform: translateY(-14px); }
+  50%      { transform: translateY(-2px); }
+  70%      { transform: translateY(-9px); }
+  85%      { transform: translateY(0px); }
+}
+
+/* ── Incorrect → shake ────────────────────────────────────────────────────── */
+.character.sad,
+.character.angry,
+.character.scared {
+  animation: char-shake 0.5s ease-in-out infinite;
+}
+@keyframes char-shake {
+  0%, 100% { transform: translateX(0px); }
+  20%      { transform: translateX(-6px) rotate(-3deg); }
+  40%      { transform: translateX(6px) rotate(3deg); }
+  60%      { transform: translateX(-4px) rotate(-2deg); }
+  80%      { transform: translateX(4px) rotate(2deg); }
+}
+
+/* ── Attack — lunge toward enemy ──────────────────────────────────────────── */
+.character.attack {
+  animation: char-attack 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes char-attack {
+  0%   { transform: translateX(0) scale(1); }
+  25%  { transform: translateX(-8px) scale(1.06); }
+  50%  { transform: translateX(30px) scale(1.1); }
+  75%  { transform: translateX(6px) scale(0.98); }
+  100% { transform: translateX(0) scale(1); }
+}
+
+/* ── Hit — knockback + brightness flash ──────────────────────────────────── */
+.character.hit {
+  animation: char-hit 0.5s ease;
+}
+@keyframes char-hit {
+  0%   { transform: translateX(0); filter: brightness(1); }
+  20%  { transform: translateX(-18px) rotate(-5deg); filter: brightness(2.5); }
+  45%  { transform: translateX(10px) rotate(3deg); filter: brightness(0.7); }
+  70%  { transform: translateX(-5px) rotate(-1deg); filter: brightness(1.3); }
+  100% { transform: translateX(0) rotate(0deg); filter: brightness(1); }
+}
+
+/* ── Eye blink ────────────────────────────────────────────────────────────── */
+.character svg .eye {
+  animation: abs-blink 4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.character svg .eye:nth-of-type(2) {
+  animation-delay: 0.06s;
+}
+@keyframes abs-blink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  93%, 97%      { transform: scaleY(0.08); }
+}
+
+/* ── Mouth: idle line ─────────────────────────────────────────────────────── */
+.character svg .mouth {
+  stroke: #1A1A1A;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+/* ── Progression character mouth animation ────────────────────────────────── */
+@keyframes prog-talk {
+  0%   { transform: scaleY(1); }
+  100% { transform: scaleY(1.5); }
+}
+
+/* ── Mouth: talking flap ──────────────────────────────────────────────────── */
+.character svg .mouth-talking {
+  stroke: #1A1A1A;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: abs-talk 0.24s ease-in-out infinite;
+}
+@keyframes abs-talk {
+  0%, 100% { transform: scaleY(1); }
+  50%      { transform: scaleY(0.1); }
+}
+
+/* =============================================================================
+   MILO MOUSE
+   ============================================================================= */
+.milo-mouse svg .ear   { fill: #D6D6D6; }
+.milo-mouse svg .head  { fill: #D6D6D6; }
+.milo-mouse svg .eye   { fill: #1A1A1A; }
+.milo-mouse svg .nose  { fill: #FFB3BA; }
+.milo-mouse svg .body  { fill: #C5C5C5; }
+.milo-mouse svg .arm   { fill: #AAAAAA; rx: 6px; }
+.milo-mouse svg .leg   { fill: #AAAAAA; }
+
+/* Arms swing when walking */
+.milo-mouse.walk svg .arm.left {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: abs-arm-left 0.32s ease-in-out infinite alternate;
+}
+.milo-mouse.walk svg .arm.right {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: abs-arm-right 0.32s ease-in-out infinite alternate;
+}
+@keyframes abs-arm-left  { 0% { transform: rotate(-18deg); } 100% { transform: rotate(12deg); } }
+@keyframes abs-arm-right { 0% { transform: rotate(12deg);  } 100% { transform: rotate(-18deg); } }
+
+/* Legs alternate when walking */
+.milo-mouse.walk svg .leg.left {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: abs-leg-left 0.32s ease-in-out infinite alternate;
+}
+.milo-mouse.walk svg .leg.right {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: abs-leg-right 0.32s ease-in-out infinite alternate;
+}
+@keyframes abs-leg-left  { 0% { transform: rotate(-20deg); } 100% { transform: rotate(14deg);  } }
+@keyframes abs-leg-right { 0% { transform: rotate(14deg);  } 100% { transform: rotate(-20deg); } }
+
+/* =============================================================================
+   TIMMY TURTLE
+   ============================================================================= */
+.timmy-turtle svg .shell       { fill: #4CAF50; }
+.timmy-turtle svg .shell-inner { fill: #2E7D32; }
+.timmy-turtle svg .head        { fill: #66BB6A; }
+.timmy-turtle svg .eye         { fill: #1A1A1A; }
+.timmy-turtle svg .leg         { fill: #66BB6A; rx: 6px; }
+
+/* Legs move subtly when walking */
+.timmy-turtle.walk svg .leg {
+  transform-box: fill-box;
+  transform-origin: center top;
+  animation: abs-turtle-leg 0.45s ease-in-out infinite alternate;
+}
+.timmy-turtle.walk svg .leg:nth-of-type(odd) {
+  animation-direction: alternate-reverse;
+}
+@keyframes abs-turtle-leg {
+  0%   { transform: rotate(-10deg); }
+  100% { transform: rotate(10deg); }
+}
+
+/* =============================================================================
+   DASH THE CHEETAH (V2)
+   ============================================================================= */
+.dash-cheetah svg .head.cheetah { fill: #F4A261; }
+.dash-cheetah svg .body.cheetah { fill: #E8955C; }
+.dash-cheetah svg .ear          { fill: #F4A261; }
+.dash-cheetah svg .eye          { fill: #1A1A1A; }
+.dash-cheetah svg .arm          { fill: #D97E48; }
+.dash-cheetah svg .leg          { fill: #D97E48; }
+.dash-cheetah svg .spot         { fill: #7B3F00; opacity: 0.55; }
+
+/* Fast walk — zippy side-to-side + lean */
+.dash-cheetah.walk-fast {
+  animation: abs-fast-walk 0.18s ease-in-out infinite alternate;
+}
+@keyframes abs-fast-walk {
+  0%   { transform: translateX(-3px) rotate(-4deg) scaleX(1.04); }
+  100% { transform: translateX(3px)  rotate(4deg)  scaleX(1.04); }
+}
+
+/* Arms swing fast */
+.dash-cheetah.walk-fast svg .arm.left {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: abs-arm-left 0.18s ease-in-out infinite alternate;
+}
+.dash-cheetah.walk-fast svg .arm.right {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: abs-arm-right 0.18s ease-in-out infinite alternate;
+}
+
+/* Legs alternate fast */
+.dash-cheetah.walk-fast svg .leg.left {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: abs-leg-left 0.18s ease-in-out infinite alternate;
+}
+.dash-cheetah.walk-fast svg .leg.right {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: abs-leg-right 0.18s ease-in-out infinite alternate;
+}
+
+/* =============================================================================
+   SKY THE EAGLE (V2)
+   ============================================================================= */
+.sky-eagle svg .head.eagle { fill: #FFFFFF; }
+.sky-eagle svg .body.eagle { fill: #7B5C3A; }
+.sky-eagle svg .beak        { fill: #F4A261; }
+.sky-eagle svg .eye         { fill: #1A1A1A; }
+.sky-eagle svg .wing        { fill: #A0785A; }
+.sky-eagle svg .leg         { fill: #E76F51; }
+
+/* Walk: waddle on ground */
+.sky-eagle.walk {
+  animation: abs-eagle-waddle 0.55s ease-in-out infinite alternate;
+}
+@keyframes abs-eagle-waddle {
+  0%   { transform: translateX(0px) rotate(-3deg); }
+  100% { transform: translateX(5px) rotate(3deg); }
+}
+
+/* Wings droop slightly when walking (flightless) */
+.sky-eagle.walk svg .wing.left {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: abs-wing-droop 0.55s ease-in-out infinite alternate;
+}
+.sky-eagle.walk svg .wing.right {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: abs-wing-droop 0.55s ease-in-out infinite alternate-reverse;
+}
+@keyframes abs-wing-droop {
+  0%   { transform: rotate(-8deg); }
+  100% { transform: rotate(8deg); }
+}
+
+/* Fly: whole body rises + wings flap */
+.sky-eagle.fly {
+  animation: abs-fly-rise 0.5s ease-in-out infinite alternate;
+}
+@keyframes abs-fly-rise {
+  0%   { transform: translateY(0px) rotate(-2deg); }
+  100% { transform: translateY(-10px) rotate(2deg); }
+}
+
+.sky-eagle.fly svg .wing.left {
+  transform-box: fill-box;
+  transform-origin: center right;
+  animation: abs-wing-flap-left 0.4s ease-in-out infinite alternate;
+}
+.sky-eagle.fly svg .wing.right {
+  transform-box: fill-box;
+  transform-origin: center left;
+  animation: abs-wing-flap-right 0.4s ease-in-out infinite alternate;
+}
+@keyframes abs-wing-flap-left {
+  0%   { transform: rotate(-30deg) scaleY(0.85); }
+  100% { transform: rotate(20deg)  scaleY(1.1);  }
+}
+@keyframes abs-wing-flap-right {
+  0%   { transform: rotate(30deg)  scaleY(0.85); }
+  100% { transform: rotate(-20deg) scaleY(1.1);  }
+}
+
+/* =============================================================================
+   MAX THE ELEPHANT (V2)
+   ============================================================================= */
+.max-elephant svg .head.elephant { fill: #9E9E9E; }
+.max-elephant svg .body.elephant { fill: #8D8D8D; }
+.max-elephant svg .ear            { fill: #B0B0B0; }
+.max-elephant svg .eye            { fill: #1A1A1A; }
+.max-elephant svg .trunk          { fill: #9E9E9E; }
+.max-elephant svg .leg            { fill: #7A7A7A; }
+
+/* Walk: gentle heavy sway */
+.max-elephant.walk {
+  animation: abs-elephant-walk 0.55s ease-in-out infinite alternate;
+}
+@keyframes abs-elephant-walk {
+  0%   { transform: translateX(0px) rotate(-2deg); }
+  100% { transform: translateX(5px) rotate(2deg); }
+}
+
+/* Legs alternate when walking */
+.max-elephant.walk svg .leg.left {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: abs-leg-left 0.55s ease-in-out infinite alternate;
+}
+.max-elephant.walk svg .leg.right {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: abs-leg-right 0.55s ease-in-out infinite alternate;
+}
+
+/* Weak: droop + slow sway */
+.max-elephant.weak-shake {
+  animation: abs-weak-droop 1.8s ease-in-out infinite;
+}
+@keyframes abs-weak-droop {
+  0%, 100% { transform: translateY(0px) rotate(-3deg); }
+  50%      { transform: translateY(5px) rotate(3deg); }
+}
+
+/* Trunk sway when idle */
+.max-elephant svg .trunk {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: abs-trunk-sway 2.8s ease-in-out infinite;
+}
+@keyframes abs-trunk-sway {
+  0%, 100% { transform: rotate(-6deg); }
+  50%      { transform: rotate(6deg); }
+}
+
+/* =============================================================================
+   FINN THE WHALE (V2)
+   ============================================================================= */
+.finn-whale svg .body.whale { fill: #0288D1; }
+.finn-whale svg .tail        { fill: #0277BD; }
+.finn-whale svg .eye         { fill: #1A1A1A; }
+.finn-whale svg .spout       { fill: #B3E5FC; }
+
+/* Swim: gentle undulating glide */
+.finn-whale.swim {
+  animation: abs-swim 1.2s ease-in-out infinite;
+}
+@keyframes abs-swim {
+  0%, 100% { transform: translateX(0px) translateY(0px) rotate(0deg); }
+  25%      { transform: translateX(4px)  translateY(-4px) rotate(-2deg); }
+  75%      { transform: translateX(-4px) translateY(4px)  rotate(2deg); }
+}
+
+/* Tail wag while swimming */
+.finn-whale.swim svg .tail {
+  transform-box: fill-box;
+  transform-origin: right center;
+  animation: abs-tail-wag 0.6s ease-in-out infinite alternate;
+}
+@keyframes abs-tail-wag {
+  0%   { transform: rotate(-18deg); }
+  100% { transform: rotate(18deg); }
+}
+
+/* Spout bob */
+.finn-whale svg .spout {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: abs-spout-bob 1.8s ease-in-out infinite;
+}
+@keyframes abs-spout-bob {
+  0%, 100% { transform: scaleY(1) translateY(0px); }
+  50%      { transform: scaleY(1.3) translateY(-4px); }
+}
+
+/* Small: scale down the whole character */
+.finn-whale.scale-small {
+  transform: scale(0.45);
+  transform-origin: center bottom;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* =============================================================================
+   BIG TICK (V2)
+   ============================================================================= */
+.big-tick svg .body.tick { fill: #6D4C41; }
+.big-tick svg .eye        { fill: #1A1A1A; }
+
+/* Tick legs are <line> elements — need stroke, not fill */
+.big-tick svg .leg {
+  stroke: #4E342E;
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+/* Antennae */
+.big-tick svg .antenna {
+  stroke: #4E342E;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+/* Big: scale up with spring */
+.big-tick.scale-big {
+  transform: scale(1.7);
+  transform-origin: center bottom;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Walk: stomping bounce */
+.big-tick.walk {
+  animation: abs-tick-walk 0.28s ease-in-out infinite alternate;
+}
+@keyframes abs-tick-walk {
+  0%   { transform: translateX(0px) translateY(0px); }
+  100% { transform: translateX(4px) translateY(-3px); }
+}
+
+/* Walk + big combined */
+.big-tick.walk.scale-big {
+  transform-origin: center bottom;
+  animation: abs-tick-walk-big 0.28s ease-in-out infinite alternate;
+}
+@keyframes abs-tick-walk-big {
+  0%   { transform: scale(1.7) translateX(0px) translateY(0px); }
+  100% { transform: scale(1.7) translateX(4px) translateY(-3px); }
+}
+
+/* Shockwave rings (applied to .ring elements) */
+.big-tick svg .ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: abs-ring-pulse 0.8s ease-out infinite;
+}
+.big-tick svg .ring:nth-of-type(2) { animation-delay: 0.2s; }
+@keyframes abs-ring-pulse {
+  0%   { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(1.3); opacity: 0; }
+}
+
+/* =============================================================================
+   KING LEO (V2)
+   ============================================================================= */
+.king-leo svg .mane      { fill: #F4A261; }
+.king-leo svg .face.lion { fill: #FFCC80; }
+.king-leo svg .eye-white { fill: #FFFFFF; }
+.king-leo svg .eye        { fill: #1A1A1A; }
+.king-leo svg .leg        { fill: #F4A261; }
+.king-leo svg .nose       { fill: #E64A19; }
+
+/* Mouth path styling */
+.king-leo svg .mouth {
+  fill: none;
+  stroke: #1A1A1A;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+.king-leo svg .mouth-talking {
+  fill: none;
+  stroke: #1A1A1A;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: abs-talk 0.24s ease-in-out infinite;
+}
+
+/* Shake: scared trembling */
+.king-leo.shake {
+  animation: abs-leo-shake 0.15s ease-in-out infinite;
+}
+@keyframes abs-leo-shake {
+  0%, 100% { transform: rotate(0deg) translateX(0px); }
+  20%      { transform: rotate(-5deg) translateX(-4px); }
+  40%      { transform: rotate(5deg)  translateX(4px); }
+  60%      { transform: rotate(-4deg) translateX(-3px); }
+  80%      { transform: rotate(4deg)  translateX(3px); }
+}
+
+/* Walk: lion stride */
+.king-leo.walk {
+  animation: abs-lion-walk 0.45s ease-in-out infinite alternate;
+}
+@keyframes abs-lion-walk {
+  0%   { transform: translateX(0px) rotate(-2deg); }
+  100% { transform: translateX(5px) rotate(2deg); }
+}
+
+.king-leo.walk svg .leg.left {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: abs-leg-left 0.45s ease-in-out infinite alternate;
+}
+.king-leo.walk svg .leg.right {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: abs-leg-right 0.45s ease-in-out infinite alternate;
+}
+
+/* =============================================================================
+   DR. IMPERFECTO (V2) — Villain Scientist
+   ============================================================================= */
+.dr-imperfecto svg .hair           { fill: #EEEEEE; }
+.dr-imperfecto svg .head           { fill: #FFCC80; }
+.dr-imperfecto svg .glasses        { fill: #374151; rx: 3px; }
+.dr-imperfecto svg .glasses-bridge { stroke: #374151; stroke-width: 2; }
+.dr-imperfecto svg .eye            { fill: #1A1A1A; }
+.dr-imperfecto svg .labcoat        { fill: #FFFFFF; stroke: #D1D5DB; stroke-width: 1.5; }
+.dr-imperfecto svg .coat-line      { stroke: #D1D5DB; stroke-width: 1.5; stroke-dasharray: 4 3; }
+.dr-imperfecto svg .button.red     { fill: #EF4444; }
+.dr-imperfecto svg .button.yellow  { fill: #FBBF24; }
+.dr-imperfecto svg .button.green   { fill: #10B981; }
+.dr-imperfecto svg .arm            { fill: #FFFFFF; stroke: #D1D5DB; stroke-width: 1.2; }
+.dr-imperfecto svg .leg            { fill: #374151; }
+
+/* Mouth: line element — animate via stroke-width oscillation */
+.dr-imperfecto svg .mouth {
+  stroke: #1A1A1A;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+.dr-imperfecto svg .mouth-talking {
+  stroke: #1A1A1A;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  animation: abs-dr-talk 0.26s ease-in-out infinite;
+}
+@keyframes abs-dr-talk {
+  0%, 100% { stroke-width: 2.5; }
+  50%      { stroke-width: 7; stroke: #BF360C; }
+}
+
+/* Idle: stiff minimal sway — strict = almost no movement */
+.dr-imperfecto.idle {
+  animation: abs-dr-idle 3s ease-in-out infinite;
+}
+.dr-imperfecto.idle.strict {
+  animation: abs-dr-strict-idle 5s ease-in-out infinite;
+}
+@keyframes abs-dr-idle {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%      { transform: translateY(-4px) rotate(1deg); }
+}
+@keyframes abs-dr-strict-idle {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-2px); }
+}
+
+/* Walk: precise marching steps */
+.dr-imperfecto.walking {
+  animation: abs-dr-walk 0.4s ease-in-out infinite alternate;
+}
+@keyframes abs-dr-walk {
+  0%   { transform: translateX(0px) rotate(-1deg); }
+  100% { transform: translateX(5px) rotate(1deg); }
+}
+.dr-imperfecto.walking svg .leg.left {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: abs-leg-left 0.4s ease-in-out infinite alternate;
+}
+.dr-imperfecto.walking svg .leg.right {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: abs-leg-right 0.4s ease-in-out infinite alternate;
+}
+
+/* Strict: eyebrows furrow (handled via SVG element visibility in component) */
+.dr-imperfecto.strict svg .hair {
+  animation: abs-hair-wild 2s ease-in-out infinite;
+}
+@keyframes abs-hair-wild {
+  0%, 100% { transform: rotate(0deg) translateY(0px); }
+  50%      { transform: rotate(1deg) translateY(-1px); }
+}

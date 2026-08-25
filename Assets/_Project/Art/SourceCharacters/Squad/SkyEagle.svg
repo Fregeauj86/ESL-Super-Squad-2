@@ -1,0 +1,66 @@
+<!--
+  SkyEagle — squad hero, default pose (stage 2 "rising", emotion idle, grounded not flying).
+  Extracted from J:/ESL Website Project/esl-super-squad-v2/src/components/characters/movable/SkyEagleV2.tsx
+  (source read-only, not modified). See _ReferenceSource/movable/SkyEagleV2.tsx for the full
+  parametric source (stage/emotion variants, fly pose) and characterStyles.css for animations.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="220" viewBox="0 0 180 220" overflow="visible">
+  <style>
+    .head.eagle { fill: #FFFFFF; }
+    .body.eagle { fill: #7B5C3A; }
+    .beak { fill: #F4A261; }
+    .eye  { fill: #1A1A1A; }
+    .wing { fill: #A0785A; }
+    .leg  { fill: #E76F51; }
+    .mouth { stroke: #1A1A1A; stroke-width: 2.5; stroke-linecap: round; }
+  </style>
+
+  <!-- Wings -->
+  <ellipse cx="32"  cy="128" rx="28" ry="58" class="wing left"  />
+  <ellipse cx="148" cy="128" rx="28" ry="58" class="wing right" />
+  <path d="M14 100 Q32 95 50 100"  fill="none" stroke="#8B6349" stroke-width="1.5" opacity="0.5" />
+  <path d="M14 115 Q32 110 50 115" fill="none" stroke="#8B6349" stroke-width="1.5" opacity="0.5" />
+  <path d="M14 130 Q32 125 50 130" fill="none" stroke="#8B6349" stroke-width="1.5" opacity="0.5" />
+  <path d="M130 100 Q148 95 166 100"  fill="none" stroke="#8B6349" stroke-width="1.5" opacity="0.5" />
+  <path d="M130 115 Q148 110 166 115" fill="none" stroke="#8B6349" stroke-width="1.5" opacity="0.5" />
+  <path d="M130 130 Q148 125 166 130" fill="none" stroke="#8B6349" stroke-width="1.5" opacity="0.5" />
+
+  <!-- Body -->
+  <ellipse cx="90" cy="138" rx="52" ry="42" class="body eagle" />
+  <ellipse cx="90" cy="148" rx="32" ry="24" fill="#FFFDE7" opacity="0.7" />
+
+  <!-- Head -->
+  <circle cx="90" cy="58" r="36" class="head eagle" />
+  <path d="M74 30 Q76 20 80 28" fill="#EEEEEE" stroke="#CCCCCC" stroke-width="1" />
+  <path d="M81 26 Q83 14 88 24" fill="#EEEEEE" stroke="#CCCCCC" stroke-width="1" />
+  <path d="M89 24 Q91 12 96 22" fill="#EEEEEE" stroke="#CCCCCC" stroke-width="1" />
+  <path d="M97 27 Q100 18 104 28" fill="#EEEEEE" stroke="#CCCCCC" stroke-width="1" />
+
+  <!-- Eyes -->
+  <ellipse cx="74"  cy="56" rx="8" ry="7" fill="#FFF9C4" stroke="#1A1A1A" stroke-width="1.5" />
+  <ellipse cx="106" cy="56" rx="8" ry="7" fill="#FFF9C4" stroke="#1A1A1A" stroke-width="1.5" />
+  <circle cx="75"  cy="57" r="5" class="eye" />
+  <circle cx="107" cy="57" r="5" class="eye" />
+  <circle cx="76"  cy="55" r="1.8" fill="white" />
+  <circle cx="108" cy="55" r="1.8" fill="white" />
+
+  <!-- Beak -->
+  <polygon points="90,74 112,84 90,94" class="beak" />
+  <line x1="90" y1="84" x2="110" y2="84" stroke="#C1440E" stroke-width="1.2" />
+
+  <!-- Mouth (idle) -->
+  <line x1="76" y1="92" x2="104" y2="92" class="mouth" />
+
+  <!-- Neck connector -->
+  <ellipse cx="90" cy="92" rx="22" ry="14" class="head eagle" />
+
+  <!-- Legs -->
+  <rect x="68"  y="174" width="16" height="36" rx="6" class="leg left" />
+  <rect x="96"  y="174" width="16" height="36" rx="6" class="leg right" />
+  <path d="M68 210 Q62 218 58 222" fill="none" stroke="#C1440E" stroke-width="3" stroke-linecap="round" />
+  <path d="M76 210 Q76 219 76 224" fill="none" stroke="#C1440E" stroke-width="3" stroke-linecap="round" />
+  <path d="M84 210 Q90 218 94 222" fill="none" stroke="#C1440E" stroke-width="3" stroke-linecap="round" />
+  <path d="M96 210 Q90 218 86 222" fill="none" stroke="#C1440E" stroke-width="3" stroke-linecap="round" />
+  <path d="M104 210 Q104 219 104 224" fill="none" stroke="#C1440E" stroke-width="3" stroke-linecap="round" />
+  <path d="M112 210 Q118 218 122 222" fill="none" stroke="#C1440E" stroke-width="3" stroke-linecap="round" />
+</svg>

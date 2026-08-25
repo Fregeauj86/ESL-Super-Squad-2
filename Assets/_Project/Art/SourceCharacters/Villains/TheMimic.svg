@@ -1,0 +1,38 @@
+<!--
+  TheMimic — villain (C2, "Master Fluency"), default pose (idle, not talking).
+  Extracted from J:/ESL Website Project/esl-super-squad-v2/src/components/characters/progression/TheMimicChar.tsx
+  (source read-only, not modified).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 200 200" overflow="visible">
+  <!-- Body (neutral humanoid) -->
+  <rect x="60" y="90" width="80" height="90" rx="10" fill="#999" />
+
+  <!-- Collar -->
+  <rect x="72" y="88" width="56" height="16" rx="6" fill="#bbb" />
+  <ellipse cx="100" cy="90" rx="18" ry="8" fill="#ccc" opacity="0.7" />
+
+  <!-- Arms -->
+  <rect x="30" y="95" width="32" height="16" rx="8" fill="#999" />
+  <rect x="138" y="95" width="32" height="16" rx="8" fill="#999" />
+  <circle cx="34"  cy="103" r="10" fill="#bbb" />
+  <circle cx="166" cy="103" r="10" fill="#bbb" />
+
+  <!-- Legs -->
+  <rect x="65"  y="174" width="22" height="24" rx="8" fill="#777" />
+  <rect x="113" y="174" width="22" height="24" rx="8" fill="#777" />
+
+  <!-- Head -->
+  <circle cx="100" cy="56" r="34" fill="#bbb" />
+  <ellipse cx="100" cy="56" rx="30" ry="28" fill="#ccc" opacity="0.4" />
+
+  <!-- Eyes, blankly observant -->
+  <circle cx="88"  cy="50" r="7" fill="white" stroke="#666" stroke-width="1.5" />
+  <circle cx="112" cy="50" r="7" fill="white" stroke="#666" stroke-width="1.5" />
+  <circle cx="88.5"  cy="50" r="4" fill="#555" />
+  <circle cx="112.5" cy="50" r="4" fill="#555" />
+  <circle cx="90" cy="48" r="1.5" fill="white" />
+  <circle cx="114" cy="48" r="1.5" fill="white" />
+
+  <!-- Mouth (idle) -->
+  <ellipse cx="100" cy="68" rx="18" ry="6" fill="black" />
+</svg>

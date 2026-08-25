@@ -1,0 +1,56 @@
+<!--
+  MaxElephant — squad hero, default pose (stage 2 "growing", emotion idle).
+  Extracted from J:/ESL Website Project/esl-super-squad-v2/src/components/characters/movable/MaxElephantV2.tsx
+  (source read-only, not modified). See _ReferenceSource/movable/MaxElephantV2.tsx for the full
+  parametric source (stage/emotion variants, weak-shake pose) and characterStyles.css for animations.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="240" viewBox="0 0 200 240" overflow="visible">
+  <style>
+    .head.elephant { fill: #9E9E9E; }
+    .body.elephant { fill: #8D8D8D; }
+    .ear   { fill: #B0B0B0; }
+    .eye   { fill: #1A1A1A; }
+    .trunk { fill: #9E9E9E; }
+    .leg   { fill: #7A7A7A; }
+    .mouth { stroke: #1A1A1A; stroke-width: 2.5; stroke-linecap: round; }
+  </style>
+
+  <!-- Ears -->
+  <ellipse cx="52"  cy="72" rx="32" ry="44" class="ear" />
+  <ellipse cx="148" cy="72" rx="32" ry="44" class="ear" />
+  <ellipse cx="52"  cy="72" rx="20" ry="30" fill="#CE93D8" opacity="0.5" />
+  <ellipse cx="148" cy="72" rx="20" ry="30" fill="#CE93D8" opacity="0.5" />
+
+  <!-- Head -->
+  <circle cx="100" cy="72" r="42" class="head elephant" />
+
+  <!-- Eyes -->
+  <circle cx="84"  cy="62" r="8" class="eye" />
+  <circle cx="116" cy="62" r="8" class="eye" />
+  <circle cx="86"  cy="59" r="3" fill="white" />
+  <circle cx="118" cy="59" r="3" fill="white" />
+
+  <!-- Cheek blush -->
+  <ellipse cx="72"  cy="82" rx="10" ry="7" fill="#FFCCBC" opacity="0.5" />
+  <ellipse cx="128" cy="82" rx="10" ry="7" fill="#FFCCBC" opacity="0.5" />
+
+  <!-- Trunk -->
+  <rect x="93" y="90" width="14" height="52" rx="7" class="trunk" />
+  <path d="M 93 140 Q 78 152 84 162 Q 90 170 100 162" fill="none" stroke="#9E9E9E" stroke-width="12" stroke-linecap="round" />
+
+  <!-- Mouth (idle) -->
+  <line x1="86" y1="98" x2="114" y2="98" class="mouth" />
+
+  <!-- Body -->
+  <ellipse cx="100" cy="158" rx="62" ry="44" class="body elephant" />
+
+  <!-- Legs -->
+  <rect x="56"  y="190" width="22" height="44" rx="10" class="leg left" />
+  <rect x="122" y="190" width="22" height="44" rx="10" class="leg right" />
+  <ellipse cx="67"  cy="234" rx="16" ry="8" fill="#6A6A6A" />
+  <ellipse cx="133" cy="234" rx="16" ry="8" fill="#6A6A6A" />
+
+  <!-- Tail -->
+  <path d="M 152 155 Q 168 148 172 160 Q 174 170 166 172" fill="none" stroke="#9E9E9E" stroke-width="5" stroke-linecap="round" />
+  <circle cx="166" cy="172" r="5" fill="#7A7A7A" />
+</svg>

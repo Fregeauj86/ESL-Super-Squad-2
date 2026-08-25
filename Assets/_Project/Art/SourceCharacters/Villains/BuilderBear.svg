@@ -1,0 +1,30 @@
+<!--
+  BuilderBear — villain (A2, "Build a Sentence" guardian), default pose (idle, not talking).
+  Extracted from J:/ESL Website Project/esl-super-squad-v2/src/components/characters/progression/BuilderBearChar.tsx
+  (source read-only, not modified).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 200 200" overflow="visible">
+  <!-- Body -->
+  <circle cx="100" cy="110" r="60" fill="#8B4513" />
+
+  <!-- Ears -->
+  <circle cx="60"  cy="50" r="20" fill="#8B4513" />
+  <circle cx="140" cy="50" r="20" fill="#8B4513" />
+  <circle cx="60"  cy="50" r="12" fill="#C47A4A" opacity="0.6" />
+  <circle cx="140" cy="50" r="12" fill="#C47A4A" opacity="0.6" />
+
+  <!-- Yellow hard hat -->
+  <ellipse cx="100" cy="62" rx="42" ry="16" fill="#FFD60A" stroke="#C49A00" stroke-width="2" />
+  <rect x="58" y="64" width="84" height="10" rx="3" fill="#FFD60A" stroke="#C49A00" stroke-width="1.5" />
+  <rect x="96" y="48" width="8" height="14" rx="2" fill="#FF6B00" />
+
+  <!-- Eyes -->
+  <circle cx="80"  cy="95" r="6" fill="black" />
+  <circle cx="120" cy="95" r="6" fill="black" />
+
+  <!-- Muzzle -->
+  <ellipse cx="100" cy="118" rx="18" ry="12" fill="#C47A4A" />
+
+  <!-- Mouth (idle) -->
+  <rect x="85" y="122" width="30" height="8" fill="black" />
+</svg>

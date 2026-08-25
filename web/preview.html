@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>From Cell — Level Preview</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { color-scheme: dark; }
+  html, body {
+    width: 100%; height: 100%;
+    background:
+      radial-gradient(circle at top left, rgba(72, 154, 132, 0.22), transparent 28%),
+      radial-gradient(circle at 85% 15%, rgba(96, 118, 196, 0.18), transparent 24%),
+      linear-gradient(180deg, #081015 0%, #0a1218 55%, #06090d 100%);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: #e7f3ee;
+  }
+  #app { display: flex; flex-direction: column; height: 100vh; padding: 18px; gap: 14px; }
+  header { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  h1 { font-size: 20px; font-weight: 700; color: #bef0d8; }
+  select {
+    background: #10191f; color: #e7f3ee; border: 1px solid rgba(190,240,225,0.25);
+    border-radius: 8px; padding: 6px 10px; font-size: 14px;
+  }
+  #status { font-size: 13px; color: #9db3ac; }
+  main { display: flex; gap: 14px; flex: 1; min-height: 0; }
+  #canvasWrap {
+    flex: 1; overflow: auto; background: #0c1418; border: 1px solid rgba(190,240,225,0.15);
+    border-radius: 14px; padding: 10px;
+  }
+  canvas { display: block; background: #142028; border-radius: 8px; }
+  #sidebar {
+    width: 300px; flex-shrink: 0; background: #0c1418; border: 1px solid rgba(190,240,225,0.15);
+    border-radius: 14px; padding: 16px; overflow-y: auto; font-size: 13px; line-height: 1.6;
+  }
+  #sidebar h2 { font-size: 15px; margin-bottom: 8px; color: #bef0d8; }
+  #sidebar .field { margin-bottom: 10px; }
+  #sidebar .label { color: #9db3ac; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .legend { list-style: none; margin-top: 14px; }
+  .legend li { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .swatch { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1>From Cell — Level Preview</h1>
+    <select id="levelSelect"></select>
+    <span id="status">Loading…</span>
+  </header>
+  <main>
+    <div id="canvasWrap"><canvas id="canvas"></canvas></div>
+    <div id="sidebar"></div>
+  </main>
+</div>
+
+<script>
+const PPU = 8; // pixels per Unity unit
+const MARGIN = 4; // world units of padding around the content
+
+async function loadManifest() {
+  const res = await fetch('preview-data/manifest.json');
+  if (!res.ok) throw new Error('manifest.json not found — run Tools.EmitLevels first.');
+  return res.json();
+}
+
+async function loadLevel(file) {
+  const res = await fetch('preview-data/' + file);
+  if (!res.ok) throw new Error(file + ' not found.');
+  return res.json();
+}
+
+function colorToCss([r, g, b, a]) {
+  return `rgba(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)}, ${a})`;
+}
+
+function computeBounds(level) {
+  let minX = level.spawn[0], maxX = level.spawn[0];
+  let minY = level.spawn[1], maxY = level.spawn[1];
+
+  const consider = (x, y, hw = 0, hh = 0) => {
+    minX = Math.min(minX, x - hw); maxX = Math.max(maxX, x + hw);
+    minY = Math.min(minY, y - hh); maxY = Math.max(maxY, y + hh);
+  };
+
+  consider(level.finish[0], level.finish[1], level.finishSize[0] / 2, level.finishSize[1] / 2);
+  for (const p of level.platforms) consider(p.position[0], p.position[1], p.size[0] / 2, p.size[1] / 2);
+  for (const h of level.hazards) consider(h.position[0], h.position[1], h.size[0] / 2, h.size[1] / 2);
+  for (const c of level.collectibles) consider(c.position[0], c.position[1], 0.5, 0.5);
+  for (const g of level.growthPickups) consider(g.position[0], g.position[1], 0.6, 0.6);
+  for (const cp of level.checkpoints) consider(cp.position[0], cp.position[1], 0.8, 1);
+  for (const w of level.windZones) consider(w.position[0], w.position[1], w.size[0] / 2, w.size[1] / 2);
+  for (const vg of level.villainGates) consider(vg.position[0], vg.position[1], vg.gateSize[0] / 2, vg.gateSize[1] / 2);
+
+  minX -= MARGIN; maxX += MARGIN; minY -= MARGIN; maxY += MARGIN;
+  return { minX, maxX, minY, maxY };
+}
+
+function render(level) {
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  const b = computeBounds(level);
+  const w = (b.maxX - b.minX) * PPU;
+  const h = (b.maxY - b.minY) * PPU;
+  canvas.width = Math.ceil(w);
+  canvas.height = Math.ceil(h);
+
+  // Unity is Y-up with an arbitrary origin; canvas is Y-down from top-left. This is the
+  // one place the coordinate flip happens — deliberately kept out of the emitter so it's
+  // visible and easy to adjust.
+  const toScreen = (x, y) => [(x - b.minX) * PPU, (b.maxY - y) * PPU];
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Platforms
+  for (const p of level.platforms) {
+    const [cx, cy] = toScreen(p.position[0], p.position[1]);
+    const pw = p.size[0] * PPU, ph = p.size[1] * PPU;
+    ctx.fillStyle = colorToCss(p.color);
+    ctx.fillRect(cx - pw / 2, cy - ph / 2, pw, ph);
+  }
+
+  // Hazards
+  ctx.fillStyle = 'rgba(200, 50, 60, 0.5)';
+  for (const hz of level.hazards) {
+    const [cx, cy] = toScreen(hz.position[0], hz.position[1]);
+    ctx.fillRect(cx - hz.size[0] * PPU / 2, cy - hz.size[1] * PPU / 2, hz.size[0] * PPU, hz.size[1] * PPU);
+  }
+
+  // Wind zones
+  ctx.fillStyle = 'rgba(80, 160, 220, 0.14)';
+  ctx.strokeStyle = 'rgba(120, 200, 255, 0.4)';
+  for (const wz of level.windZones) {
+    const [cx, cy] = toScreen(wz.position[0], wz.position[1]);
+    const ww = wz.size[0] * PPU, wh = wz.size[1] * PPU;
+    ctx.fillRect(cx - ww / 2, cy - wh / 2, ww, wh);
+    ctx.strokeRect(cx - ww / 2, cy - wh / 2, ww, wh);
+    // force direction arrow
+    const mag = Math.hypot(wz.force[0], wz.force[1]) || 1;
+    const dx = (wz.force[0] / mag) * 24, dy = -(wz.force[1] / mag) * 24;
+    ctx.strokeStyle = 'rgba(160, 220, 255, 0.8)';
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + dx, cy + dy); ctx.stroke();
+  }
+
+  // Role pads / gates
+  for (const rp of level.rolePads) {
+    const [cx, cy] = toScreen(rp.position[0], rp.position[1]);
+    ctx.fillStyle = rp.role === 'Nerve' ? 'rgba(120,150,240,0.85)' : 'rgba(240,130,110,0.85)';
+    ctx.fillRect(cx - 12 * PPU / 8, cy - 4 * PPU / 8, 24 * PPU / 8, 8 * PPU / 8);
+  }
+  for (const rg of level.roleGates) {
+    const [cx, cy] = toScreen(rg.position[0], rg.position[1]);
+    ctx.fillStyle = 'rgba(150, 90, 180, 0.85)';
+    ctx.fillRect(cx - 4 * PPU / 8, cy - 16 * PPU / 8, 8 * PPU / 8, 32 * PPU / 8);
+    label(ctx, cx, cy - 20, rg.requiredRole, '#c9a8e8');
+  }
+
+  // Collectibles
+  ctx.fillStyle = '#f0d848';
+  for (const c of level.collectibles) {
+    const [cx, cy] = toScreen(c.position[0], c.position[1]);
+    ctx.beginPath(); ctx.arc(cx, cy, 5, 0, Math.PI * 2); ctx.fill();
+  }
+
+  // Growth pickups
+  ctx.fillStyle = '#f078a8';
+  for (const g of level.growthPickups) {
+    const [cx, cy] = toScreen(g.position[0], g.position[1]);
+    ctx.beginPath(); ctx.arc(cx, cy, 6, 0, Math.PI * 2); ctx.fill();
+  }
+
+  // Checkpoints
+  ctx.fillStyle = 'rgba(100, 200, 255, 0.6)';
+  for (const cp of level.checkpoints) {
+    const [cx, cy] = toScreen(cp.position[0], cp.position[1]);
+    ctx.fillRect(cx - 4, cy - 16, 8, 32);
+  }
+
+  // Villain gates
+  for (const vg of level.villainGates) {
+    const [cx, cy] = toScreen(vg.position[0], vg.position[1]);
+    const gw = vg.gateSize[0] * PPU, gh = vg.gateSize[1] * PPU;
+    ctx.fillStyle = 'rgba(140, 30, 40, 0.85)';
+    ctx.fillRect(cx - gw / 2, cy - gh / 2, gw, gh);
+    label(ctx, cx, cy - gh / 2 - 8, `${vg.villain} (${vg.cefrLevel})`, '#ff9a9a');
+  }
+
+  // Spawn + finish
+  const [sx, sy] = toScreen(level.spawn[0], level.spawn[1]);
+  ctx.fillStyle = '#6ef0c8';
+  ctx.beginPath(); ctx.arc(sx, sy, 7, 0, Math.PI * 2); ctx.fill();
+  label(ctx, sx, sy - 14, 'SPAWN', '#6ef0c8');
+
+  const [fx, fy] = toScreen(level.finish[0], level.finish[1]);
+  const fw = level.finishSize[0] * PPU, fh = level.finishSize[1] * PPU;
+  ctx.strokeStyle = '#6ef0c8'; ctx.lineWidth = 2;
+  ctx.strokeRect(fx - fw / 2, fy - fh / 2, fw, fh);
+  label(ctx, fx, fy - fh / 2 - 8, 'FINISH', '#6ef0c8');
+}
+
+function label(ctx, x, y, text, color) {
+  ctx.font = '11px Inter, sans-serif';
+  ctx.fillStyle = color;
+  ctx.textAlign = 'center';
+  ctx.fillText(text, x, y);
+}
+
+function renderSidebar(level) {
+  const el = document.getElementById('sidebar');
+  el.innerHTML = `
+    <h2>${level.name}</h2>
+    <div class="field"><div class="label">World width</div>${level.worldWidth} units</div>
+    <div class="field"><div class="label">Required collectibles</div>${level.requiredCollectibles} / ${level.collectibles.length}</div>
+    <div class="field"><div class="label">Tutorial line</div>${level.tutorialLine || '(none)'}</div>
+    <div class="field"><div class="label">Villain gates</div>${
+      level.villainGates.length
+        ? level.villainGates.map(vg => `${vg.villain} — ${vg.cefrLevel} (${vg.encounterId})`).join('<br>')
+        : '(none)'
+    }</div>
+    <ul class="legend">
+      <li><span class="swatch" style="background:#4a7a65"></span>Ground</li>
+      <li><span class="swatch" style="background:rgba(200,50,60,0.7)"></span>Hazard</li>
+      <li><span class="swatch" style="background:rgba(80,160,220,0.5)"></span>Wind zone</li>
+      <li><span class="swatch" style="background:#f0d848"></span>Vocabulary gem</li>
+      <li><span class="swatch" style="background:#f078a8"></span>Confidence star</li>
+      <li><span class="swatch" style="background:rgba(100,200,255,0.8)"></span>Checkpoint</li>
+      <li><span class="swatch" style="background:rgba(140,30,40,0.85)"></span>Villain gate</li>
+      <li><span class="swatch" style="background:#6ef0c8"></span>Spawn / Finish</li>
+    </ul>
+  `;
+}
+
+async function selectLevel(file) {
+  document.getElementById('status').textContent = 'Loading ' + file + '…';
+  try {
+    const level = await loadLevel(file);
+    render(level);
+    renderSidebar(level);
+    document.getElementById('status').textContent = '';
+  } catch (err) {
+    document.getElementById('status').textContent = 'Error: ' + err.message;
+  }
+}
+
+async function main() {
+  try {
+    const manifest = await loadManifest();
+    const select = document.getElementById('levelSelect');
+    if (manifest.length === 0) {
+      document.getElementById('status').textContent = 'No levels authored yet — manifest.json is empty.';
+      return;
+    }
+    for (const entry of manifest) {
+      const opt = document.createElement('option');
+      opt.value = entry.file;
+      opt.textContent = `Level ${entry.levelIndex} — ${entry.name}`;
+      select.appendChild(opt);
+    }
+    select.addEventListener('change', () => selectLevel(select.value));
+    await selectLevel(manifest[0].file);
+  } catch (err) {
+    document.getElementById('status').textContent = 'Error: ' + err.message;
+  }
+}
+
+main();
+</script>
+</body>
+</html>
