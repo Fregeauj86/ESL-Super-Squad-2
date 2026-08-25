@@ -39,6 +39,18 @@ learning content rather than becoming a new completion requirement.
 The scene creates its NavMesh from the 3D environment colliders at runtime. This keeps the
 conversion scene self-contained while the level-by-level conversion adapter is developed.
 
+### Character art
+
+The 3D actors use the existing SVG character source files through the baked SpriteBank rather
+than introducing a second art pipeline. Level 1 displays Milo Mouse, Timmy Turtle, and Echo Fox.
+`ArtKeys.HeroForStage` maps all ten evolution stages to the existing hero artwork, while
+`ArtKeys.VillainForEncounter` maps all six ESL villains.
+
+The 3D scene menu automatically bakes the character art before generating its scene. **From Cell
+→ Setup → Bake Character Art** remains available when updating the art on its own. The sprites
+remain billboarded and crisp in the 3D scene while the actors retain 3D colliders and NavMesh
+movement.
+
 ## What is included now
 
 - Elevated/isometric camera with smooth follow and zoom
@@ -48,6 +60,7 @@ conversion scene self-contained while the level-by-level conversion adapter is d
 - NPC patrol movement with walking/idle animation hooks
 - Tap-to-interact targeting for actors and objects
 - Mobile-safe HUD instructions
+- SVG-backed 3D character visuals for the Level 1 hero, guide, and villain gate
 - A complete 3D adaptation of Level 1's authored route, wind, gems, checkpoint, Echo Fox ESL
   gate, finish, and local progress save
 

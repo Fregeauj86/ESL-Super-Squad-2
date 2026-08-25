@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 using System.IO;
+using FromCell.Art;
 using FromCell.Core;
 using FromCell.Evolution;
 using FromCell.ESL;
@@ -32,6 +33,7 @@ namespace FromCell.Editor
         public static void CreateConversionTestScene()
         {
             EnsureDirectory(SceneDirectory);
+            FromCellArtBaker.BakeAll();
 
             Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             var root = new GameObject("ThirdPersonConversion");
@@ -61,6 +63,10 @@ namespace FromCell.Editor
         public static void CreateLevel1Scene()
         {
             EnsureDirectory(SceneDirectory);
+            // 3D sprite cards are viewed closer than their 2D counterparts. Rebuild the SVG
+            // art first so a fresh clone cannot accidentally generate a scene with old,
+            // low-resolution character PNGs.
+            FromCellArtBaker.BakeAll();
 
             Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             var root = new GameObject("ThirdPersonLevel01");
@@ -230,17 +236,15 @@ namespace FromCell.Editor
             agent.stoppingDistance = 0.1f;
             agent.updateRotation = false;
 
-            var body = CreatePrimitive(
-                PrimitiveType.Capsule,
-                "Body",
+            var body = CreateSpriteCharacter(
                 player.transform,
-                new Vector3(0f, 0.9f, 0f),
-                new Vector3(0.82f, 0.9f, 0.82f),
-                new Color(0.95f, 0.78f, 0.28f));
-            RemoveCollider(body);
+                "MiloMouseVisual",
+                ArtKeys.HeroMiloMouse,
+                2.3f);
 
             var animation = player.AddComponent<ThirdPersonActorAnimation>();
             SetObjectReference(animation, "visualRoot", body.transform);
+            SetBool(body.GetComponent<ThirdPersonCharacterVisual>(), "followEvolutionStage", true);
             var locomotion = player.AddComponent<ThirdPersonLocomotion>();
             SetObjectReference(locomotion, "actorAnimation", animation);
             var interaction = player.AddComponent<ThirdPersonInteractionSystem>();
@@ -290,14 +294,11 @@ namespace FromCell.Editor
             agent.stoppingDistance = 0.15f;
             agent.updateRotation = false;
 
-            var body = CreatePrimitive(
-                PrimitiveType.Capsule,
-                "Body",
+            var body = CreateSpriteCharacter(
                 npc.transform,
-                new Vector3(0f, 0.75f, 0f),
-                new Vector3(0.74f, 0.75f, 0.74f),
-                new Color(0.48f, 0.86f, 0.72f));
-            RemoveCollider(body);
+                "TimmyTurtleVisual",
+                ArtKeys.HeroTimmyTurtle,
+                2.2f);
 
             var animation = npc.AddComponent<ThirdPersonActorAnimation>();
             SetObjectReference(animation, "visualRoot", body.transform);
@@ -521,14 +522,12 @@ namespace FromCell.Editor
                     blocker.GetComponent<Collider>(),
                     environmentRoot.GetComponent<ThirdPersonRuntimeNavMesh>());
 
-                var fox = CreatePrimitive(
-                    PrimitiveType.Capsule,
-                    "EchoFox",
+                var fox = CreateSpriteCharacter(
                     gateRoot.transform,
-                    new Vector3(0f, 0f, 2.6f),
-                    new Vector3(1f, 1f, 1f),
-                    new Color(0.92f, 0.3f, 0.28f));
-                RemoveCollider(fox);
+                    "EchoFoxVisual",
+                    ArtKeys.VillainEchoFox,
+                    2.25f);
+                fox.transform.localPosition = new Vector3(0f, 1.125f, 2.6f);
             }
 
             var finish = new GameObject("GlowingExit");
@@ -577,6 +576,26 @@ namespace FromCell.Editor
             text.raycastTarget = false;
             text.text = content;
             return text;
+        }
+
+        static GameObject CreateSpriteCharacter(
+            Transform parent,
+            string name,
+            string spriteKey,
+            float desiredHeight)
+        {
+            var go = new GameObject(name);
+            go.transform.SetParent(parent, false);
+            go.transform.localPosition = new Vector3(0f, desiredHeight * 0.5f, 0f);
+
+            var spriteRenderer = go.AddComponent<SpriteRenderer>();
+            spriteRenderer.sprite = SpriteBank.Get(spriteKey);
+            spriteRenderer.sortingOrder = 10;
+
+            var visual = go.AddComponent<ThirdPersonCharacterVisual>();
+            SetString(visual, "spriteKey", spriteKey);
+            SetFloat(visual, "desiredHeight", desiredHeight);
+            return go;
         }
 
         static GameObject CreatePrimitive(
@@ -684,6 +703,17 @@ namespace FromCell.Editor
             if (property != null)
             {
                 property.floatValue = value;
+                so.ApplyModifiedPropertiesWithoutUndo();
+            }
+        }
+
+        static void SetBool(Object target, string propertyName, bool value)
+        {
+            var so = new SerializedObject(target);
+            var property = so.FindProperty(propertyName);
+            if (property != null)
+            {
+                property.boolValue = value;
                 so.ApplyModifiedPropertiesWithoutUndo();
             }
         }

@@ -21,7 +21,10 @@ namespace FromCell.Editor
     {
         const string OutRoot = "Assets/_Project/Art/Generated/Resources/FromCell";
         const string SourceRoot = "Assets/_Project/Art/SourceCharacters";
-        const int OutputSize = 128;
+        // The 3D conversion displays the same SVG art at a much larger on-screen size than
+        // the 2D prototype. A 256px bake keeps eyes, mouths, and thin outlines clean on a
+        // perspective camera without making the Android character atlas unnecessarily large.
+        const int OutputSize = 256;
 
         // Deliberately NOT 32 (the project-wide PPU used for tiles/pickups/RuntimeShapes).
         // The player's SpriteRenderer lives directly on the player root GameObject today
@@ -111,7 +114,7 @@ namespace FromCell.Editor
             importer.textureType = TextureImporterType.Sprite;
             importer.spriteImportMode = SpriteImportMode.Single;
             importer.spritePixelsPerUnit = PixelsPerUnit;
-            importer.filterMode = FilterMode.Point;
+            importer.filterMode = FilterMode.Bilinear;
             importer.mipmapEnabled = false;
             importer.alphaIsTransparency = true;
             importer.sRGBTexture = true;

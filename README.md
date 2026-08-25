@@ -23,6 +23,12 @@ The first authored level is also available as an isolated 3D scene. Choose
 **From Cell → 3D Conversion → Create 3D Level 1 - First Steps** to create
 `Assets/_Project/Scenes/ThirdPerson/3D_Level_01_FirstSteps.unity`.
 
+The 3D conversion uses the existing SVG character artwork through the generated SpriteBank:
+Milo Mouse is the Level 1 hero, Timmy Turtle is the guide, and Echo Fox is the villain gate.
+The same art mapping covers every hero evolution stage and all six villain encounters.
+The 3D scene generator automatically bakes current sprites first; **From Cell → Setup → Bake
+Character Art** remains available when updating art outside of scene generation.
+
 ### Setup menu items
 
 | Menu | What it does |
@@ -103,6 +109,7 @@ Full architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
       object interaction, and mobile-safe HUD
 - [x] 3D Level 1 conversion — authored wind route, vocabulary gems, checkpoint, Echo Fox ESL
        gate, completion state, and progress save without changing the original 2D level
+- [x] 3D character art — SVG-backed Milo Mouse, Timmy Turtle, Echo Fox, and full roster mapping
 - [ ] Art assets (placeholder sprites only)
 - [ ] Audio clips (manager ready)
 - [ ] Play Store build / signing
