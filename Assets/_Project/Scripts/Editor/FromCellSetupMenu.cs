@@ -68,7 +68,7 @@ namespace FromCell.Editor
             }
 
             EditorSceneManager.OpenScene(BootScenePath);
-            if (Object.FindFirstObjectByType<Camera>() == null)
+            if (Object.FindAnyObjectByType<Camera>() == null)
             {
                 CreateMainCamera();
                 EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
@@ -453,7 +453,7 @@ namespace FromCell.Editor
             bootstrapSo.FindProperty("playerPrefab").objectReferenceValue = playerPrefab;
             bootstrapSo.ApplyModifiedPropertiesWithoutUndo();
 
-            if (GameObject.FindFirstObjectByType<GameFlowSystem>() == null)
+            if (GameObject.FindAnyObjectByType<GameFlowSystem>() == null)
             {
                 var flow = new GameObject("GameFlowSystem");
                 var flowComp = flow.AddComponent<GameFlowSystem>();
@@ -503,7 +503,7 @@ namespace FromCell.Editor
 
         static GameObject BuildMobileUiHierarchy()
         {
-            if (Object.FindFirstObjectByType<EventSystem>() == null)
+            if (Object.FindAnyObjectByType<EventSystem>() == null)
             {
                 var eventSystem = new GameObject("EventSystem");
                 eventSystem.AddComponent<EventSystem>();
