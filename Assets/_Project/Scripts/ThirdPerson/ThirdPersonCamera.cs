@@ -34,13 +34,13 @@ namespace FromCell.ThirdPerson
         {
             float zoomDelta = 0f;
 
-            if (Mathf.Abs(Input.mouseScrollDelta.y) > 0.01f)
-                zoomDelta = -Input.mouseScrollDelta.y * zoomSpeed;
+            if (Mathf.Abs(UnityEngine.Input.mouseScrollDelta.y) > 0.01f)
+                zoomDelta = -UnityEngine.Input.mouseScrollDelta.y * zoomSpeed;
 
-            if (Input.touchCount == 2)
+            if (UnityEngine.Input.touchCount == 2)
             {
-                Touch first = Input.GetTouch(0);
-                Touch second = Input.GetTouch(1);
+                Touch first = UnityEngine.Input.GetTouch(0);
+                Touch second = UnityEngine.Input.GetTouch(1);
                 Vector2 previousFirst = first.position - first.deltaPosition;
                 Vector2 previousSecond = second.position - second.deltaPosition;
                 float previousDistance = Vector2.Distance(previousFirst, previousSecond);

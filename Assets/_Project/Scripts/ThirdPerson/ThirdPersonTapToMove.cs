@@ -108,7 +108,7 @@ namespace FromCell.ThirdPerson
 
         bool TryGetPointerTap(out Vector2 screenPosition, out int pointerId)
         {
-            if (Input.touchCount > 1)
+            if (UnityEngine.Input.touchCount > 1)
             {
                 pendingTouchId = int.MinValue;
                 touchSequenceCancelled = true;
@@ -117,9 +117,9 @@ namespace FromCell.ThirdPerson
                 return false;
             }
 
-            if (Input.touchCount == 1)
+            if (UnityEngine.Input.touchCount == 1)
             {
-                Touch touch = Input.GetTouch(0);
+                Touch touch = UnityEngine.Input.GetTouch(0);
                 switch (touch.phase)
                 {
                     case TouchPhase.Began:
@@ -160,9 +160,9 @@ namespace FromCell.ThirdPerson
                 return false;
             }
 
-            if (Input.GetMouseButtonDown(0))
+            if (UnityEngine.Input.GetMouseButtonDown(0))
             {
-                screenPosition = Input.mousePosition;
+                screenPosition = UnityEngine.Input.mousePosition;
                 pointerId = -1;
                 return true;
             }
