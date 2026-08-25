@@ -111,5 +111,5 @@ See [docs/PLAYTEST.md](docs/PLAYTEST.md) for a full test checklist.
 
 ### Source validation
 
-Run `python3 tools/validate_unity_source.py` before committing Unity C# changes. GitHub Actions
-also checks for deprecated Unity object lookup APIs automatically.
+Run `python3 tools/validate_unity_source.py` before committing Unity C# changes. The project
+also registers it as a repeatable source-validation check.

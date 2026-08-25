@@ -81,7 +81,7 @@ The project targets Unity 6 APIs. Before committing Unity script changes, run:
 python3 tools/validate_unity_source.py
 ```
 
-The same check runs automatically in GitHub Actions and rejects deprecated
+The project registers this as a named source-validation check and rejects deprecated
 `FindFirstObjectByType` and `FindObjectOfType` calls. Use `FindAnyObjectByType<T>()` instead,
 unless a future feature explicitly requires deterministic instance ordering.
 
