@@ -22,7 +22,7 @@ namespace FromCell.UI
 
         public void Refresh()
         {
-            var evolution = FindFirstObjectByType<EvolutionSystem>();
+            var evolution = FindAnyObjectByType<EvolutionSystem>();
             var flow = GameFlowSystem.Instance;
 
             if (stageLabel != null)

@@ -36,7 +36,7 @@ namespace FromCell.Level
 
         void ConfigureCompletion(LevelData level)
         {
-            var completion = FindFirstObjectByType<LevelCompletionSystem>();
+            var completion = FindAnyObjectByType<LevelCompletionSystem>();
             if (completion == null)
             {
                 var go = new GameObject("LevelCompletionSystem");
@@ -48,7 +48,7 @@ namespace FromCell.Level
 
         void ApplyEvolution(LevelData level)
         {
-            var evolution = FindFirstObjectByType<EvolutionSystem>();
+            var evolution = FindAnyObjectByType<EvolutionSystem>();
             if (evolution == null) return;
 
             if (gameConfig != null)
@@ -61,14 +61,14 @@ namespace FromCell.Level
         {
             if (level.tutorialPrompts == null || level.tutorialPrompts.Length == 0) return;
 
-            var banner = FindFirstObjectByType<TutorialBanner>();
+            var banner = FindAnyObjectByType<TutorialBanner>();
             if (banner != null)
                 banner.Show(level.tutorialPrompts[0]);
         }
 
         void RefreshHud()
         {
-            var hud = FindFirstObjectByType<GameplayHUD>();
+            var hud = FindAnyObjectByType<GameplayHUD>();
             if (hud != null)
                 hud.Refresh();
         }

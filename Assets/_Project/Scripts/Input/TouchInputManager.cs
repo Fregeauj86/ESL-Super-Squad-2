@@ -28,7 +28,7 @@ namespace FromCell.Input
 
         static void EnsureEventSystem()
         {
-            if (FindFirstObjectByType<EventSystem>() != null)
+            if (FindAnyObjectByType<EventSystem>() != null)
                 return;
 
             var go = new GameObject("EventSystem");

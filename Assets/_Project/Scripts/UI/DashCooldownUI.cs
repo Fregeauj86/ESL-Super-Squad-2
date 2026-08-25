@@ -14,7 +14,7 @@ namespace FromCell.UI
         void Update()
         {
             if (abilities == null)
-                abilities = FindFirstObjectByType<AbilityManager>();
+                abilities = FindAnyObjectByType<AbilityManager>();
 
             if (abilities == null) return;
 

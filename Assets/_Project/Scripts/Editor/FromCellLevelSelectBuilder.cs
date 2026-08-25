@@ -35,7 +35,7 @@ namespace FromCell.Editor
             cam.tag = "MainCamera";
             cam.transform.position = new Vector3(0f, 0f, -10f);
 
-            if (Object.FindFirstObjectByType<EventSystem>() == null)
+            if (Object.FindAnyObjectByType<EventSystem>() == null)
             {
                 var es = new GameObject("EventSystem");
                 es.AddComponent<EventSystem>();
@@ -75,7 +75,7 @@ namespace FromCell.Editor
             UnityEventTools.AddPersistentListener(backBtn.GetComponent<Button>().onClick, controller.OnBack);
 
             var systemsPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(SystemsPrefabPath);
-            if (systemsPrefab != null && Object.FindFirstObjectByType<GameFlowSystem>() == null)
+            if (systemsPrefab != null && Object.FindAnyObjectByType<GameFlowSystem>() == null)
                 PrefabUtility.InstantiatePrefab(systemsPrefab);
 
             EditorSceneManager.SaveScene(scene, LevelSelectScenePath);

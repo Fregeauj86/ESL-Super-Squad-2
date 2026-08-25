@@ -108,3 +108,8 @@ Full architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 - [ ] Play Store build / signing
 
 See [docs/PLAYTEST.md](docs/PLAYTEST.md) for a full test checklist.
+
+### Source validation
+
+Run `python3 tools/validate_unity_source.py` before committing Unity C# changes. GitHub Actions
+also checks for deprecated Unity object lookup APIs automatically.

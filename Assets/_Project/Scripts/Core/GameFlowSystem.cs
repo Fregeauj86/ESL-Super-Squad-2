@@ -51,8 +51,8 @@ namespace FromCell.Core
 
         void RefreshSceneReferences()
         {
-            evolutionSystem = FindFirstObjectByType<EvolutionSystem>();
-            evolutionPresenter = FindFirstObjectByType<EvolutionPresenter>();
+            evolutionSystem = FindAnyObjectByType<EvolutionSystem>();
+            evolutionPresenter = FindAnyObjectByType<EvolutionPresenter>();
             ResolveLevelIndexFromScene();
         }
 
@@ -118,7 +118,7 @@ namespace FromCell.Core
             InputGate.Instance?.SetInputEnabled(false);
 
             if (evolutionSystem == null)
-                evolutionSystem = FindFirstObjectByType<EvolutionSystem>();
+                evolutionSystem = FindAnyObjectByType<EvolutionSystem>();
 
             bool isFinalLevel = gameConfig == null ||
                                 currentLevelIndex >= gameConfig.levels.Length - 1;
@@ -137,7 +137,7 @@ namespace FromCell.Core
                 runTracker != null ? runTracker.DeathCount : 0);
 
             if (evolutionPresenter == null)
-                evolutionPresenter = FindFirstObjectByType<EvolutionPresenter>();
+                evolutionPresenter = FindAnyObjectByType<EvolutionPresenter>();
 
             evolutionPresenter?.ShowEvolution(evolutionSystem?.CurrentStageData);
 

@@ -26,10 +26,10 @@ namespace FromCell.Evolution
 
         void Awake()
         {
-            player = FindFirstObjectByType<PlayerController>();
-            movement = FindFirstObjectByType<PlayerMovement>();
-            abilities = FindFirstObjectByType<AbilityManager>();
-            visual = FindFirstObjectByType<PlayerVisual>();
+            player = FindAnyObjectByType<PlayerController>();
+            movement = FindAnyObjectByType<PlayerMovement>();
+            abilities = FindAnyObjectByType<AbilityManager>();
+            visual = FindAnyObjectByType<PlayerVisual>();
         }
 
         void Start()
@@ -37,7 +37,7 @@ namespace FromCell.Evolution
             if (GameFlowSystem.Instance?.Config != null)
                 gameConfig = GameFlowSystem.Instance.Config;
 
-            if (FindFirstObjectByType<Level.LevelBootstrap>() != null)
+            if (FindAnyObjectByType<Level.LevelBootstrap>() != null)
                 return;
 
             ApplyStage(startingStageIndex);
@@ -57,13 +57,13 @@ namespace FromCell.Evolution
         public void ApplyStage(int stageIndex)
         {
             if (movement == null)
-                movement = FindFirstObjectByType<PlayerMovement>();
+                movement = FindAnyObjectByType<PlayerMovement>();
             if (player == null)
-                player = FindFirstObjectByType<PlayerController>();
+                player = FindAnyObjectByType<PlayerController>();
             if (abilities == null)
-                abilities = FindFirstObjectByType<AbilityManager>();
+                abilities = FindAnyObjectByType<AbilityManager>();
             if (visual == null)
-                visual = FindFirstObjectByType<PlayerVisual>();
+                visual = FindAnyObjectByType<PlayerVisual>();
 
             currentStageIndex = Mathf.Clamp(stageIndex, 0, 9);
             EvolutionStageData data = GetStageData(currentStageIndex);
@@ -73,7 +73,7 @@ namespace FromCell.Evolution
             else
                 ApplyFallback(stageIndex);
 
-            var hud = FindFirstObjectByType<GameplayHUD>();
+            var hud = FindAnyObjectByType<GameplayHUD>();
             if (hud != null)
                 hud.Refresh();
 

@@ -69,7 +69,7 @@ namespace FromCell.Editor
             cam.tag = "MainCamera";
             cam.transform.position = new Vector3(0f, 0f, -10f);
 
-            if (Object.FindFirstObjectByType<EventSystem>() == null)
+            if (Object.FindAnyObjectByType<EventSystem>() == null)
             {
                 var es = new GameObject("EventSystem");
                 es.AddComponent<EventSystem>();
@@ -103,10 +103,10 @@ namespace FromCell.Editor
             menuSo.ApplyModifiedPropertiesWithoutUndo();
 
             var systemsPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(SystemsPrefabPath);
-            if (systemsPrefab != null && Object.FindFirstObjectByType<GameFlowSystem>() == null)
+            if (systemsPrefab != null && Object.FindAnyObjectByType<GameFlowSystem>() == null)
                 PrefabUtility.InstantiatePrefab(systemsPrefab);
 
-            if (Object.FindFirstObjectByType<AudioManager>() == null)
+            if (Object.FindAnyObjectByType<AudioManager>() == null)
             {
                 var audio = new GameObject("AudioManager");
                 audio.AddComponent<AudioManager>();
@@ -124,7 +124,7 @@ namespace FromCell.Editor
             cam.AddComponent<Camera>().backgroundColor = new Color(0.05f, 0.08f, 0.12f);
             cam.tag = "MainCamera";
 
-            if (Object.FindFirstObjectByType<EventSystem>() == null)
+            if (Object.FindAnyObjectByType<EventSystem>() == null)
             {
                 var es = new GameObject("EventSystem");
                 es.AddComponent<EventSystem>();

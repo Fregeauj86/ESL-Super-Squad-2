@@ -73,6 +73,18 @@ The existing 2D scenes are preserved while the 3D version is converted increment
 See [THIRD_PERSON_CONVERSION.md](THIRD_PERSON_CONVERSION.md) for the conversion boundaries,
 controls, and next steps.
 
+## 10. Unity source validation
+
+The project targets Unity 6 APIs. Before committing Unity script changes, run:
+
+```bash
+python3 tools/validate_unity_source.py
+```
+
+The same check runs automatically in GitHub Actions and rejects deprecated
+`FindFirstObjectByType` and `FindObjectOfType` calls. Use `FindAnyObjectByType<T>()` instead,
+unless a future feature explicitly requires deterministic instance ordering.
+
 ## 9. Play 3D Level 1 - First Steps
 
 1. Run **From Cell → 3D Conversion → Create 3D Level 1 - First Steps**.

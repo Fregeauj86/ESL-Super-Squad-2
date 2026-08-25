@@ -18,7 +18,7 @@ namespace FromCell.UI
             timer = pollInterval;
 
             if (abilities == null)
-                abilities = FindFirstObjectByType<AbilityManager>();
+                abilities = FindAnyObjectByType<AbilityManager>();
 
             if (dashButtonRoot != null && abilities != null)
                 dashButtonRoot.SetActive(abilities.canDash);

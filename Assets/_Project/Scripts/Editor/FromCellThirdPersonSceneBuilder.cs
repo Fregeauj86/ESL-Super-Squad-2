@@ -348,7 +348,7 @@ namespace FromCell.Editor
 
         static GameObject CreateMobileHud(GameObject player)
         {
-            if (Object.FindFirstObjectByType<EventSystem>() == null)
+            if (Object.FindAnyObjectByType<EventSystem>() == null)
             {
                 var eventSystem = new GameObject("EventSystem");
                 eventSystem.AddComponent<EventSystem>();

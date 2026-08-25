@@ -38,7 +38,7 @@ namespace FromCell.ThirdPerson
 
         void Start()
         {
-            var evolution = FindFirstObjectByType<EvolutionSystem>();
+            var evolution = FindAnyObjectByType<EvolutionSystem>();
             if (evolution != null && evolution.CurrentStageData != null)
                 ApplyStageSettings(evolution.CurrentStageData);
             else
@@ -53,7 +53,7 @@ namespace FromCell.ThirdPerson
 
         void OnStageApplied(int stageIndex)
         {
-            var evolution = FindFirstObjectByType<EvolutionSystem>();
+            var evolution = FindAnyObjectByType<EvolutionSystem>();
             if (evolution != null && evolution.CurrentStageData != null)
                 ApplyStageSettings(evolution.CurrentStageData);
         }
