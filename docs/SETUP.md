@@ -72,3 +72,12 @@ The existing 2D scenes are preserved while the 3D version is converted increment
 
 See [THIRD_PERSON_CONVERSION.md](THIRD_PERSON_CONVERSION.md) for the conversion boundaries,
 controls, and next steps.
+
+## 9. Play 3D Level 1 - First Steps
+
+1. Run **From Cell → 3D Conversion → Create 3D Level 1 - First Steps**.
+2. Unity opens `Assets/_Project/Scenes/ThirdPerson/3D_Level_01_FirstSteps.unity`.
+3. Press Play, tap/click the route to move through the three wind currents, and collect the
+   optional vocabulary gems.
+4. Reach Echo Fox to open the existing ESL challenge. Pass it to remove the barrier.
+5. Reach the glowing exit to complete Level 1. The original 2D Level 1 remains unchanged.

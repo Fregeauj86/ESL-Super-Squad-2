@@ -3,7 +3,7 @@
 The original 2D game remains unchanged. The 3D work starts in a separate Unity scene so the
 existing levels, browser build, data, and progression systems remain available as a reference.
 
-## Create the first 3D test scene
+## Create a 3D conversion scene
 
 1. Open the project in **Unity 6.0.5** (the version recorded in `ProjectSettings/ProjectVersion.txt`).
 2. Let Unity finish importing the project.
@@ -13,6 +13,22 @@ existing levels, browser build, data, and progression systems remain available a
 5. Unity creates and opens:
    `Assets/_Project/Scenes/ThirdPerson/3D_Conversion_Test.unity`
 6. Press **Play**.
+
+## Play the converted Level 1
+
+Level 1 is the first complete 3D vertical slice. It is generated separately from the original
+2D scene and reads the same `Level01` blueprint for its route, wind zones, collectibles,
+checkpoint, Echo Fox encounter ID, and finish location.
+
+1. Select **From Cell → 3D Conversion → Create 3D Level 1 - First Steps**.
+2. Unity creates and opens:
+   `Assets/_Project/Scenes/ThirdPerson/3D_Level_01_FirstSteps.unity`
+3. Press **Play**, then tap/click along the route.
+4. Cross the three wind currents, collect vocabulary gems if desired, clear the Echo Fox ESL
+   challenge, and reach the glowing exit.
+
+The original Level 1 blueprint requires zero collectibles, so the five gems remain collectible
+learning content rather than becoming a new completion requirement.
 
 ## Test controls
 
@@ -32,13 +48,15 @@ conversion scene self-contained while the level-by-level conversion adapter is d
 - NPC patrol movement with walking/idle animation hooks
 - Tap-to-interact targeting for actors and objects
 - Mobile-safe HUD instructions
+- A complete 3D adaptation of Level 1's authored route, wind, gems, checkpoint, Echo Fox ESL
+  gate, finish, and local progress save
 
 ## Preserved systems
 
 No existing 2D scene, web build, level blueprint, evolution data, ESL content, checkpoint,
-collectible, hazard, save, or progression source was deleted or replaced. The next conversion
-step is to adapt one existing level blueprint into this 3D scene structure, then verify that
-its mechanics and completion outcome match the original before converting additional levels.
+collectible, hazard, save, or progression source was deleted or replaced. Level 1 is built in a
+separate 3D scene; the next conversion step is to verify it on Android, then adapt further
+levels and evolution abilities without changing the original path.
 
 ## Android note
 

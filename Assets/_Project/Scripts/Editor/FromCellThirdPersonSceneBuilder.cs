@@ -2,6 +2,8 @@
 using System.IO;
 using FromCell.Core;
 using FromCell.Evolution;
+using FromCell.Input;
+using FromCell.Level;
 using FromCell.ThirdPerson;
 using UnityEditor;
 using UnityEditor.Events;
@@ -22,6 +24,7 @@ namespace FromCell.Editor
     {
         const string SceneDirectory = "Assets/_Project/Scenes/ThirdPerson";
         const string ScenePath = SceneDirectory + "/3D_Conversion_Test.unity";
+        const string Level1ScenePath = SceneDirectory + "/3D_Level_01_FirstSteps.unity";
         const string ConfigPath = "Assets/_Project/ScriptableObjects/GameConfig.asset";
 
         [MenuItem("From Cell/3D Conversion/Create 3D Conversion Test Scene", false, 0)]
@@ -51,6 +54,67 @@ namespace FromCell.Editor
             Selection.activeGameObject = player;
             Debug.Log(
                 "From Cell: 3D conversion test scene created. Press Play, then tap/click the ground to move.");
+        }
+
+        [MenuItem("From Cell/3D Conversion/Create 3D Level 1 - First Steps", false, 1)]
+        public static void CreateLevel1Scene()
+        {
+            EnsureDirectory(SceneDirectory);
+
+            Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            var root = new GameObject("ThirdPersonLevel01");
+            var environmentRoot = new GameObject("Environment");
+            environmentRoot.transform.SetParent(root.transform);
+            var contentRoot = new GameObject("LevelContent");
+            contentRoot.transform.SetParent(root.transform);
+
+            LevelBlueprint blueprint = Level01.Build();
+            CreateLighting(root.transform);
+            CreateLevel1Environment(environmentRoot.transform, blueprint);
+            CreateNavigationRoot(environmentRoot.transform, new Vector3(360f, 12f, 30f));
+
+            GameObject player = CreatePlayer(
+                root.transform,
+                new Vector3(blueprint.spawn.x, 0f, 0f));
+            CreateCamera(root.transform, player.transform);
+
+            GameObject hud = CreateMobileHud(player);
+            var status = CreateText(
+                hud.transform,
+                "LevelStatus",
+                "Preparing Level 1...",
+                24,
+                new Vector2(0f, -126f),
+                new Vector2(1240f, 58f),
+                new Vector2(0.5f, 1f),
+                TextAnchor.UpperCenter);
+            status.color = new Color(0.8f, 0.94f, 1f);
+
+            var inputGate = new GameObject("InputGate");
+            inputGate.transform.SetParent(root.transform);
+            inputGate.AddComponent<InputGate>();
+            root.AddComponent<SaveProgressService>();
+
+            // Reuse the existing authoring tool and ESL catalog so Echo Fox presents the
+            // same A1 exercise as the 2D level's gate.
+            FromCellEslUiBuilder.BuildEslChallengeOverlay(hud);
+
+            var levelFlow = root.AddComponent<ThirdPersonLevel1Flow>();
+            ThirdPersonVillainGate villainGate = CreateLevel1Content(
+                contentRoot.transform,
+                environmentRoot.transform,
+                blueprint,
+                levelFlow);
+            levelFlow.Configure(villainGate, status, blueprint.requiredCollectibles);
+
+            CreateEvolutionSystem(root.transform);
+
+            EditorSceneManager.SaveScene(scene, Level1ScenePath);
+            AssetDatabase.Refresh();
+            EditorSceneManager.OpenScene(Level1ScenePath);
+            Selection.activeGameObject = player;
+            Debug.Log(
+                "From Cell: 3D Level 1 created. Collect all vocabulary gems, clear Echo Fox, then reach the exit.");
         }
 
         static void CreateLighting(Transform parent)
@@ -129,27 +193,31 @@ namespace FromCell.Editor
             }
         }
 
-        static void CreateNavigationRoot(Transform environmentRoot)
+        static void CreateNavigationRoot(Transform environmentRoot, Vector3? sizeOverride = null)
         {
             var navigation = environmentRoot.gameObject.AddComponent<ThirdPersonRuntimeNavMesh>();
             var so = new SerializedObject(navigation);
-            so.FindProperty("navMeshSize").vector3Value = new Vector3(40f, 12f, 34f);
+            so.FindProperty("navMeshSize").vector3Value = sizeOverride ?? new Vector3(40f, 12f, 34f);
             so.FindProperty("agentRadius").floatValue = 0.45f;
             so.FindProperty("agentHeight").floatValue = 1.8f;
             so.ApplyModifiedPropertiesWithoutUndo();
         }
 
-        static GameObject CreatePlayer(Transform parent)
+        static GameObject CreatePlayer(Transform parent, Vector3? startPosition = null)
         {
             var player = new GameObject("Player3D");
             player.transform.SetParent(parent);
-            player.transform.position = new Vector3(-9f, 0f, 0f);
+            player.transform.position = startPosition ?? new Vector3(-9f, 0f, 0f);
             TrySetTag(player, "Player");
 
             var collider = player.AddComponent<CapsuleCollider>();
             collider.center = new Vector3(0f, 0.9f, 0f);
             collider.height = 1.8f;
             collider.radius = 0.42f;
+
+            var rigidbody = player.AddComponent<Rigidbody>();
+            rigidbody.isKinematic = true;
+            rigidbody.useGravity = false;
 
             var agent = player.AddComponent<NavMeshAgent>();
             agent.radius = 0.42f;
@@ -278,7 +346,7 @@ namespace FromCell.Editor
             SetFloat(interactable, "interactionRadius", 2.8f);
         }
 
-        static void CreateMobileHud(GameObject player)
+        static GameObject CreateMobileHud(GameObject player)
         {
             if (Object.FindFirstObjectByType<EventSystem>() == null)
             {
@@ -331,6 +399,153 @@ namespace FromCell.Editor
 
             var interaction = player.GetComponent<ThirdPersonInteractionSystem>();
             SetObjectReference(interaction, "promptText", prompt);
+            return canvasGo;
+        }
+
+        static void CreateLevel1Environment(Transform parent, LevelBlueprint blueprint)
+        {
+            foreach (PlatformDef platform in blueprint.platforms)
+            {
+                CreatePrimitive(
+                    PrimitiveType.Cube,
+                    platform.name,
+                    parent,
+                    new Vector3(platform.position.x, -0.5f, 0f),
+                    new Vector3(platform.size.x, 1f, 12f),
+                    new Color(0.16f, 0.46f, 0.34f));
+            }
+
+            CreatePrimitive(
+                PrimitiveType.Cube,
+                "DriftPath",
+                parent,
+                new Vector3(68.5f, 0.03f, 0f),
+                new Vector3(153f, 0.08f, 4.5f),
+                new Color(0.78f, 0.64f, 0.4f));
+
+            for (int i = 0; i < 16; i++)
+            {
+                float x = -5f + i * 10f;
+                float side = i % 2 == 0 ? -1f : 1f;
+                CreatePrimitive(
+                    PrimitiveType.Cylinder,
+                    "RouteMarker_" + (i + 1),
+                    parent,
+                    new Vector3(x, 0.75f, side * 5.4f),
+                    new Vector3(0.38f, 0.75f, 0.38f),
+                    new Color(0.25f, 0.57f, 0.42f));
+                CreatePrimitive(
+                    PrimitiveType.Sphere,
+                    "RouteMarkerCanopy_" + (i + 1),
+                    parent,
+                    new Vector3(x, 2.1f, side * 5.4f),
+                    new Vector3(1.35f, 1.35f, 1.35f),
+                    new Color(0.34f, 0.72f, 0.42f));
+            }
+        }
+
+        static ThirdPersonVillainGate CreateLevel1Content(
+            Transform contentRoot,
+            Transform environmentRoot,
+            LevelBlueprint blueprint,
+            ThirdPersonLevel1Flow levelFlow)
+        {
+            foreach (WindZoneDef wind in blueprint.windZones)
+            {
+                var zone = new GameObject(wind.name);
+                zone.transform.SetParent(contentRoot);
+                zone.transform.position = new Vector3(wind.position.x, 1.5f, 0f);
+                var trigger = zone.AddComponent<BoxCollider>();
+                trigger.size = new Vector3(wind.size.x, 3f, 7f);
+                var current = zone.AddComponent<ThirdPersonWindZone>();
+                current.Configure(new Vector3(wind.force.x, 0f, wind.force.y));
+
+                for (float x = -wind.size.x * 0.4f; x <= wind.size.x * 0.4f; x += 8f)
+                {
+                    CreatePrimitive(
+                        PrimitiveType.Cube,
+                        "WindArrow",
+                        zone.transform,
+                        new Vector3(x, 0f, 0f),
+                        new Vector3(4f, 0.12f, 0.7f),
+                        new Color(0.3f, 0.78f, 0.95f));
+                }
+            }
+
+            foreach (CollectibleDef collectible in blueprint.collectibles)
+            {
+                var gem = CreatePrimitive(
+                    PrimitiveType.Sphere,
+                    collectible.name,
+                    contentRoot,
+                    new Vector3(collectible.position.x, 1.05f, 0f),
+                    new Vector3(0.75f, 0.75f, 0.75f),
+                    new Color(1f, 0.76f, 0.18f));
+                gem.AddComponent<ThirdPersonCollectible>();
+            }
+
+            foreach (CheckpointDef checkpoint in blueprint.checkpoints)
+            {
+                var beacon = CreatePrimitive(
+                    PrimitiveType.Cylinder,
+                    checkpoint.name,
+                    contentRoot,
+                    new Vector3(checkpoint.position.x, 1.2f, 0f),
+                    new Vector3(0.6f, 1.2f, 0.6f),
+                    new Color(0.46f, 0.78f, 1f));
+                var trigger = beacon.GetComponent<Collider>();
+                trigger.isTrigger = true;
+                beacon.AddComponent<ThirdPersonCheckpoint>();
+            }
+
+            ThirdPersonVillainGate villainGate = null;
+            foreach (VillainGateDef gate in blueprint.villainGates)
+            {
+                var blocker = CreatePrimitive(
+                    PrimitiveType.Cube,
+                    "EchoFoxBarrier",
+                    environmentRoot,
+                    new Vector3(gate.position.x, 1.5f, 0f),
+                    new Vector3(0.7f, 3f, 13f),
+                    new Color(0.62f, 0.18f, 0.28f));
+
+                var gateRoot = new GameObject("EchoFoxGate");
+                gateRoot.transform.SetParent(contentRoot);
+                gateRoot.transform.position = new Vector3(gate.position.x - 1.5f, 1.5f, 0f);
+                var gateTrigger = gateRoot.AddComponent<BoxCollider>();
+                gateTrigger.size = new Vector3(2.5f, 3f, 12f);
+                villainGate = gateRoot.AddComponent<ThirdPersonVillainGate>();
+                villainGate.Configure(
+                    gate.encounterId,
+                    blocker.GetComponent<Collider>(),
+                    environmentRoot.GetComponent<ThirdPersonRuntimeNavMesh>());
+
+                var fox = CreatePrimitive(
+                    PrimitiveType.Capsule,
+                    "EchoFox",
+                    gateRoot.transform,
+                    new Vector3(0f, 0f, 2.6f),
+                    new Vector3(1f, 1f, 1f),
+                    new Color(0.92f, 0.3f, 0.28f));
+                RemoveCollider(fox);
+            }
+
+            var finish = new GameObject("GlowingExit");
+            finish.transform.SetParent(contentRoot);
+            finish.transform.position = new Vector3(blueprint.finish.x, 1.5f, 0f);
+            var finishTrigger = finish.AddComponent<BoxCollider>();
+            finishTrigger.size = new Vector3(2f, 3f, 13f);
+            var finishZone = finish.AddComponent<ThirdPersonFinishZone3D>();
+            finishZone.Configure(levelFlow);
+            CreatePrimitive(
+                PrimitiveType.Cylinder,
+                "ExitBeacon",
+                finish.transform,
+                Vector3.zero,
+                new Vector3(1.1f, 1.5f, 1.1f),
+                new Color(1f, 0.92f, 0.34f));
+
+            return villainGate;
         }
 
         static Text CreateText(
@@ -374,7 +589,7 @@ namespace FromCell.Editor
             var go = GameObject.CreatePrimitive(primitiveType);
             go.name = name;
             go.transform.SetParent(parent);
-            go.transform.position = position;
+            go.transform.localPosition = position;
             go.transform.localScale = scale;
 
             var renderer = go.GetComponent<Renderer>();
