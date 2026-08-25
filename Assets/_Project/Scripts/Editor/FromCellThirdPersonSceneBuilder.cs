@@ -380,9 +380,14 @@ namespace FromCell.Editor
             var renderer = go.GetComponent<Renderer>();
             if (renderer != null)
             {
-                var shader = Shader.Find("Universal Render Pipeline/Lit");
+                // The imported project includes URP resources but does not currently assign
+                // an active render pipeline in GraphicsSettings. Prefer a shader compatible
+                // with the active pipeline so generated primitives do not render magenta.
+                var shader = UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline != null
+                    ? Shader.Find("Universal Render Pipeline/Lit")
+                    : Shader.Find("Standard");
                 if (shader == null)
-                    shader = Shader.Find("Standard");
+                    shader = Shader.Find("Unlit/Color");
 
                 var material = new Material(shader) { color = color };
                 renderer.sharedMaterial = material;
