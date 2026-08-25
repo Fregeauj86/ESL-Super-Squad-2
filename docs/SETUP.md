@@ -60,3 +60,15 @@ For now, open `Level_01_Cell` directly and press Play.
 2. Player Settings → IL2CPP, ARM64
 3. Minimum API per Play Store requirements
 4. Build AAB
+
+## 8. 3D conversion test scene
+
+The existing 2D scenes are preserved while the 3D version is converted incrementally.
+
+1. Run **From Cell → 3D Conversion → Create 3D Conversion Test Scene**.
+2. Unity opens `Assets/_Project/Scenes/ThirdPerson/3D_Conversion_Test.unity`.
+3. Press Play, then tap/click the ground to move.
+4. Tap an NPC or vocabulary sign to approach and interact.
+
+See [THIRD_PERSON_CONVERSION.md](THIRD_PERSON_CONVERSION.md) for the conversion boundaries,
+controls, and next steps.

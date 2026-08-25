@@ -13,6 +13,12 @@ Android 2D evolution platformer. Begin as a single cell and evolve through 10 bi
 4. Open `Assets/_Project/Scenes/Boot/_Boot.unity` or `_MainMenu.unity` → **Play**.
 5. **New Game** from menu, or open `Level_01_Cell` directly to test a single level.
 
+### 3D conversion test scene
+
+The original 2D game remains intact while the 3D mobile conversion is developed in an isolated
+scene. In Unity, choose **From Cell → 3D Conversion → Create 3D Conversion Test Scene**, then
+press Play. See [docs/THIRD_PERSON_CONVERSION.md](docs/THIRD_PERSON_CONVERSION.md).
+
 ### Setup menu items
 
 | Menu | What it does |
@@ -89,6 +95,8 @@ Full architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 - [x] Level completion validation (collectibles, growth orbs, exit pulse)
 - [x] Browser playable build (`web/`) — all 11 levels, touch + keyboard
 - [x] Wind zones, player facing, audio manager scaffold
+- [x] Isolated 3D conversion test scene — isometric camera, NavMesh tap-to-move, NPC patrols,
+      object interaction, and mobile-safe HUD
 - [ ] Art assets (placeholder sprites only)
 - [ ] Audio clips (manager ready)
 - [ ] Play Store build / signing
