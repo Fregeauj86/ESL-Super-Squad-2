@@ -27,3 +27,7 @@ args = "python3 tools/validate_unity_source.py"
 
 [workflows.workflow.metadata]
 isValidation = true
+
+[postMerge]
+path = "tools/post-merge-setup.sh"
+timeoutMs = 120000
