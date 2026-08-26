@@ -65,8 +65,17 @@ namespace FromCell.ThirdPerson
         {
             IsPassed = true;
             if (blockingCollider != null)
+            {
                 blockingCollider.enabled = false;
-            if (runtimeNavMesh != null)
+                var obstacle = blockingCollider.GetComponent<NavMeshObstacle>();
+                if (obstacle != null)
+                    obstacle.enabled = false;
+            }
+
+            // Pre-baked scenes use a carving NavMeshObstacle for the barrier, so disabling it
+            // opens the route without a launch-sized collider scan. Graybox scenes keep the
+            // async rebuild fallback for environments that have no baked data yet.
+            if (runtimeNavMesh != null && !runtimeNavMesh.UsesPrebakedData)
                 runtimeNavMesh.Build();
         }
 

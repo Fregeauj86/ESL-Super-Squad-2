@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System.Collections.Generic;
 using System.IO;
 using FromCell.Art;
 using FromCell.Core;
@@ -8,6 +9,7 @@ using FromCell.Input;
 using FromCell.Level;
 using FromCell.ThirdPerson;
 using UnityEditor;
+using UnityEditor.Build.Reporting;
 using UnityEditor.Events;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -25,9 +27,13 @@ namespace FromCell.Editor
     public static class FromCellThirdPersonSceneBuilder
     {
         const string SceneDirectory = "Assets/_Project/Scenes/ThirdPerson";
+        const string NavigationDirectory = SceneDirectory + "/Navigation";
         const string ScenePath = SceneDirectory + "/3D_Conversion_Test.unity";
         const string Level1ScenePath = SceneDirectory + "/3D_Level_01_FirstSteps.unity";
         const string ConfigPath = "Assets/_Project/ScriptableObjects/GameConfig.asset";
+        const string AndroidDevelopmentBuildPath = "Builds/Android/FromCell3DConversion-dev.apk";
+        const string AndroidLevel1DevelopmentBuildPath = "Builds/Android/FromCell3DLevel01-dev.apk";
+        static readonly Dictionary<Color32, Material> materialPalette = new Dictionary<Color32, Material>();
 
         [MenuItem("From Cell/3D Conversion/Create 3D Conversion Test Scene", false, 0)]
         public static void CreateConversionTestScene()
@@ -36,13 +42,15 @@ namespace FromCell.Editor
             FromCellArtBaker.BakeAll();
 
             Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            ResetMaterialPalette();
             var root = new GameObject("ThirdPersonConversion");
             var environmentRoot = new GameObject("Environment");
             environmentRoot.transform.SetParent(root.transform);
 
             CreateLighting(root.transform);
             CreateEnvironment(environmentRoot.transform);
-            CreateNavigationRoot(environmentRoot.transform);
+            ThirdPersonRuntimeNavMesh navigation = CreateNavigationRoot(environmentRoot.transform);
+            BakeNavigationAsset(navigation, "3D_Conversion_Test_NavMesh");
 
             GameObject player = CreatePlayer(root.transform);
             CreateCamera(root.transform, player.transform);
@@ -69,6 +77,7 @@ namespace FromCell.Editor
             FromCellArtBaker.BakeAll();
 
             Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            ResetMaterialPalette();
             var root = new GameObject("ThirdPersonLevel01");
             var environmentRoot = new GameObject("Environment");
             environmentRoot.transform.SetParent(root.transform);
@@ -78,7 +87,10 @@ namespace FromCell.Editor
             LevelBlueprint blueprint = Level01.Build();
             CreateLighting(root.transform);
             CreateLevel1Environment(environmentRoot.transform, blueprint);
-            CreateNavigationRoot(environmentRoot.transform, new Vector3(360f, 12f, 30f));
+            ThirdPersonRuntimeNavMesh navigation = CreateNavigationRoot(
+                environmentRoot.transform,
+                new Vector3(360f, 12f, 30f));
+            BakeNavigationAsset(navigation, "3D_Level_01_FirstSteps_NavMesh");
 
             GameObject player = CreatePlayer(
                 root.transform,
@@ -124,6 +136,59 @@ namespace FromCell.Editor
                 "From Cell: 3D Level 1 created. Collect all vocabulary gems, clear Echo Fox, then reach the exit.");
         }
 
+        [MenuItem("From Cell/3D Conversion/Build Android Development APK", false, 20)]
+        public static void BuildAndroidDevelopmentApk()
+        {
+            BuildAndroidDevelopmentApk(
+                ScenePath,
+                AndroidDevelopmentBuildPath,
+                "3D conversion test scene");
+        }
+
+        [MenuItem("From Cell/3D Conversion/Build 3D Level 1 Development APK", false, 21)]
+        public static void BuildLevel1AndroidDevelopmentApk()
+        {
+            BuildAndroidDevelopmentApk(
+                Level1ScenePath,
+                AndroidLevel1DevelopmentBuildPath,
+                "3D Level 1 scene");
+        }
+
+        static void BuildAndroidDevelopmentApk(string scenePath, string apkPath, string sceneLabel)
+        {
+            if (EditorUserBuildSettings.activeBuildTarget != BuildTarget.Android)
+            {
+                Debug.LogError(
+                    "From Cell: switch the active platform to Android before building the 3D development APK.");
+                return;
+            }
+
+            if (!File.Exists(scenePath))
+            {
+                Debug.LogError(
+                    $"From Cell: create the {sceneLabel} before building its Android APK.");
+                return;
+            }
+
+            FromCellSetupMenu.ApplyAndroidDefaults();
+            Directory.CreateDirectory(Path.GetDirectoryName(apkPath));
+            var options = new BuildPlayerOptions
+            {
+                scenes = new[] { scenePath },
+                locationPathName = apkPath,
+                target = BuildTarget.Android,
+                options = BuildOptions.Development |
+                          BuildOptions.AllowDebugging |
+                          BuildOptions.ConnectWithProfiler
+            };
+
+            BuildReport report = BuildPipeline.BuildPlayer(options);
+            if (report.summary.result == BuildResult.Succeeded)
+                Debug.Log($"From Cell: Android development APK built at {apkPath}.");
+            else
+                Debug.LogError($"From Cell: Android development APK build failed: {report.summary.result}.");
+        }
+
         static void CreateLighting(Transform parent)
         {
             var lightGo = new GameObject("Sun");
@@ -140,21 +205,23 @@ namespace FromCell.Editor
 
         static void CreateEnvironment(Transform parent)
         {
-            CreatePrimitive(
+            GameObject ground = CreatePrimitive(
                 PrimitiveType.Cube,
                 "Ground",
                 parent,
                 new Vector3(0f, -0.5f, 0f),
                 new Vector3(30f, 1f, 22f),
                 new Color(0.18f, 0.48f, 0.36f));
+            SetGroundLayer(ground);
 
-            CreatePrimitive(
+            GameObject path = CreatePrimitive(
                 PrimitiveType.Cube,
                 "Path",
                 parent,
                 new Vector3(0f, 0.03f, 0f),
                 new Vector3(26f, 0.08f, 5f),
                 new Color(0.82f, 0.67f, 0.43f));
+            SetGroundLayer(path);
 
             CreatePrimitive(
                 PrimitiveType.Cube,
@@ -200,14 +267,36 @@ namespace FromCell.Editor
             }
         }
 
-        static void CreateNavigationRoot(Transform environmentRoot, Vector3? sizeOverride = null)
+        static ThirdPersonRuntimeNavMesh CreateNavigationRoot(Transform environmentRoot, Vector3? sizeOverride = null)
         {
             var navigation = environmentRoot.gameObject.AddComponent<ThirdPersonRuntimeNavMesh>();
             var so = new SerializedObject(navigation);
             so.FindProperty("navMeshSize").vector3Value = sizeOverride ?? new Vector3(40f, 12f, 34f);
             so.FindProperty("agentRadius").floatValue = 0.45f;
             so.FindProperty("agentHeight").floatValue = 1.8f;
+            so.FindProperty("buildAsynchronously").boolValue = true;
             so.ApplyModifiedPropertiesWithoutUndo();
+            return navigation;
+        }
+
+        static void BakeNavigationAsset(ThirdPersonRuntimeNavMesh navigation, string assetName)
+        {
+            NavMeshData bakedData = navigation.BuildPrebakedData();
+            if (bakedData == null)
+            {
+                Debug.LogError($"From Cell 3D: unable to bake NavMesh asset '{assetName}'.");
+                return;
+            }
+
+            EnsureDirectory(NavigationDirectory);
+            string assetPath = $"{NavigationDirectory}/{assetName}.asset";
+            if (AssetDatabase.LoadAssetAtPath<NavMeshData>(assetPath) != null)
+                AssetDatabase.DeleteAsset(assetPath);
+
+            bakedData.name = assetName;
+            AssetDatabase.CreateAsset(bakedData, assetPath);
+            SetObjectReference(navigation, "prebuiltNavMesh", bakedData);
+            AssetDatabase.SaveAssets();
         }
 
         static GameObject CreatePlayer(Transform parent, Vector3? startPosition = null)
@@ -250,6 +339,7 @@ namespace FromCell.Editor
             var interaction = player.AddComponent<ThirdPersonInteractionSystem>();
             var movement = player.AddComponent<ThirdPersonTapToMove>();
             SetObjectReference(movement, "interactionSystem", interaction);
+            SetLayerMask(movement, "groundMask", LayerMask.GetMask("Ground"));
 
             return player;
         }
@@ -366,8 +456,17 @@ namespace FromCell.Editor
             scaler.matchWidthOrHeight = 0.5f;
             canvasGo.AddComponent<GraphicRaycaster>();
 
+            var safeArea = new GameObject("SafeArea", typeof(RectTransform));
+            safeArea.transform.SetParent(canvasGo.transform, false);
+            var safeAreaRect = safeArea.GetComponent<RectTransform>();
+            safeAreaRect.anchorMin = Vector2.zero;
+            safeAreaRect.anchorMax = Vector2.one;
+            safeAreaRect.offsetMin = Vector2.zero;
+            safeAreaRect.offsetMax = Vector2.zero;
+            safeArea.AddComponent<ThirdPersonSafeArea>();
+
             var title = CreateText(
-                canvasGo.transform,
+                safeArea.transform,
                 "Title",
                 "FROM CELL  •  3D CONVERSION",
                 28,
@@ -378,18 +477,18 @@ namespace FromCell.Editor
             title.color = new Color(1f, 0.95f, 0.76f);
 
             var instruction = CreateText(
-                canvasGo.transform,
+                safeArea.transform,
                 "Instruction",
-                "Tap / click the ground to move  •  Tap a character or object to interact",
-                22,
+                "Tap ground to move  •  Tap objects to interact  •  Pinch to zoom",
+                24,
                 new Vector2(36f, -78f),
-                new Vector2(1000f, 45f),
+                new Vector2(1200f, 50f),
                 new Vector2(0f, 1f),
                 TextAnchor.UpperLeft);
             instruction.color = Color.white;
 
             var prompt = CreateText(
-                canvasGo.transform,
+                safeArea.transform,
                 "InteractionPrompt",
                 "Tap the ground to move",
                 26,
@@ -401,29 +500,31 @@ namespace FromCell.Editor
 
             var interaction = player.GetComponent<ThirdPersonInteractionSystem>();
             SetObjectReference(interaction, "promptText", prompt);
-            return canvasGo;
+            return safeArea;
         }
 
         static void CreateLevel1Environment(Transform parent, LevelBlueprint blueprint)
         {
             foreach (PlatformDef platform in blueprint.platforms)
             {
-                CreatePrimitive(
+                GameObject platformObject = CreatePrimitive(
                     PrimitiveType.Cube,
                     platform.name,
                     parent,
                     new Vector3(platform.position.x, -0.5f, 0f),
                     new Vector3(platform.size.x, 1f, 12f),
                     new Color(0.16f, 0.46f, 0.34f));
+                SetGroundLayer(platformObject);
             }
 
-            CreatePrimitive(
+            GameObject driftPath = CreatePrimitive(
                 PrimitiveType.Cube,
                 "DriftPath",
                 parent,
                 new Vector3(68.5f, 0.03f, 0f),
                 new Vector3(153f, 0.08f, 4.5f),
                 new Color(0.78f, 0.64f, 0.4f));
+            SetGroundLayer(driftPath);
 
             for (int i = 0; i < 16; i++)
             {
@@ -510,6 +611,11 @@ namespace FromCell.Editor
                     new Vector3(gate.position.x, 1.5f, 0f),
                     new Vector3(0.7f, 3f, 13f),
                     new Color(0.62f, 0.18f, 0.28f));
+                var blockerObstacle = blocker.AddComponent<NavMeshObstacle>();
+                blockerObstacle.shape = NavMeshObstacleShape.Box;
+                blockerObstacle.size = Vector3.one;
+                blockerObstacle.carving = true;
+                blockerObstacle.carveOnlyStationary = true;
 
                 var gateRoot = new GameObject("EchoFoxGate");
                 gateRoot.transform.SetParent(contentRoot);
@@ -614,21 +720,44 @@ namespace FromCell.Editor
 
             var renderer = go.GetComponent<Renderer>();
             if (renderer != null)
-            {
-                // The imported project includes URP resources but does not currently assign
-                // an active render pipeline in GraphicsSettings. Prefer a shader compatible
-                // with the active pipeline so generated primitives do not render magenta.
-                var shader = UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline != null
-                    ? Shader.Find("Universal Render Pipeline/Lit")
-                    : Shader.Find("Standard");
-                if (shader == null)
-                    shader = Shader.Find("Unlit/Color");
-
-                var material = new Material(shader) { color = color };
-                renderer.sharedMaterial = material;
-            }
+                renderer.sharedMaterial = GetGeometryMaterial(color);
 
             return go;
+        }
+
+        static Material GetGeometryMaterial(Color color)
+        {
+            Color32 key = color;
+            if (materialPalette.TryGetValue(key, out var existing))
+                return existing;
+
+            // The imported project includes URP resources but does not currently assign an
+            // active render pipeline in GraphicsSettings. Prefer a shader compatible with the
+            // active pipeline so generated primitives do not render magenta.
+            var shader = UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline != null
+                ? Shader.Find("Universal Render Pipeline/Lit")
+                : Shader.Find("Standard");
+            if (shader == null)
+                shader = Shader.Find("Unlit/Color");
+
+            var material = new Material(shader)
+            {
+                name = $"FromCell3D_Palette_{key.r:X2}{key.g:X2}{key.b:X2}",
+                color = color
+            };
+            materialPalette.Add(key, material);
+            return material;
+        }
+
+        static void ResetMaterialPalette()
+        {
+            foreach (var material in materialPalette.Values)
+            {
+                if (material != null)
+                    Object.DestroyImmediate(material);
+            }
+
+            materialPalette.Clear();
         }
 
         static void RemoveCollider(GameObject go)
@@ -636,6 +765,18 @@ namespace FromCell.Editor
             var collider = go.GetComponent<Collider>();
             if (collider != null)
                 Object.DestroyImmediate(collider);
+        }
+
+        static void SetGroundLayer(GameObject go)
+        {
+            int groundLayer = LayerMask.NameToLayer("Ground");
+            if (groundLayer < 0)
+            {
+                Debug.LogWarning("From Cell 3D: the Ground layer is missing. Run the project setup menu first.");
+                return;
+            }
+
+            go.layer = groundLayer;
         }
 
         static void CreateEvolutionSystem(Transform parent)
@@ -714,6 +855,17 @@ namespace FromCell.Editor
             if (property != null)
             {
                 property.boolValue = value;
+                so.ApplyModifiedPropertiesWithoutUndo();
+            }
+        }
+
+        static void SetLayerMask(Object target, string propertyName, LayerMask value)
+        {
+            var so = new SerializedObject(target);
+            var property = so.FindProperty(propertyName);
+            if (property != null)
+            {
+                property.intValue = value.value;
                 so.ApplyModifiedPropertiesWithoutUndo();
             }
         }
